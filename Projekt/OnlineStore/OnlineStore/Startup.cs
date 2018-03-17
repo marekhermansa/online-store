@@ -11,24 +11,26 @@ namespace OnlineStore
 {
     public class Startup
     {
-        // This method gets called by the runtime. Use this method to add services to the container.
-        // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            // set up shared objects
+            services.AddMvc();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
+            // set up an HTTP request processor
 
-            app.Run(async (context) =>
-            {
-                await context.Response.WriteAsync("Hello World!");
-            });
+            // display a page that shows detailed information about exceptions
+            // **Enable the developer exception page only when the app is running in the Development environment.**
+            app.UseDeveloperExceptionPage();
+            // provide status code pages such as 404 Not Found
+            // https://docs.microsoft.com/en-us/aspnet/core/fundamentals/error-handling
+            app.UseStatusCodePages();
+            // enable support for serving static content from the wwwroot folder
+            app.UseStaticFiles();
+            // enable ASP.NET Core MVC
+            app.UseMvc(routes => {});
         }
     }
 }
