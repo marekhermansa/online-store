@@ -1,0 +1,10 @@
+﻿@*the view will receive a sequence of Product
+objects from the action method as its model data*@
+@model IEnumerable<Product>
+@foreach (var p in Model)
+{
+    <div>
+        @p.Name @p.Price.ToString("c")
+        @p.Description    
+    </div>
+}

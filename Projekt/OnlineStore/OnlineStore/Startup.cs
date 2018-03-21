@@ -36,8 +36,14 @@ namespace OnlineStore
             app.UseStatusCodePages();
             // enable support for serving static content from the wwwroot folder
             app.UseStaticFiles();
-            // enable ASP.NET Core MVC
-            app.UseMvc(routes => {});
+            // enable ASP.NET Core MVC;
+            // send requests that arrive for the root URL of the application 
+            // (http://mysite /) to the List action method in the ProductController class
+            app.UseMvc(routes => {
+                routes.MapRoute(
+                name: "default",
+                template: "{controller=Product}/{action=List}/{id?}");
+            });
         }
     }
 }
