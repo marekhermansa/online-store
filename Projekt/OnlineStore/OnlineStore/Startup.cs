@@ -14,6 +14,9 @@ namespace OnlineStore
 {
     public class Startup
     {
+        // receive details of the configuration data 
+        // contained in the appsettings.json file and 
+        // use it to configure Entity Framework Core
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -22,12 +25,15 @@ namespace OnlineStore
 
         public void ConfigureServices(IServiceCollection services)
         {
+            // set up Entity Framework Core within the ConfigureServices method
+            services.AddDbContext<ApplicationDbContext>(options => 
+            options.UseSqlServer(Configuration["Data:OnlineStoreProducts:ConnectionString"]));
             // when a component (controller) needs an implementation 
             // of the IProductRepository interface, it should receive
-            // an instance of the TemporaryProductRepository class
-            // (a new FakeProductRepository object should be created 
+            // an instance of the EFProductRepository class
+            // (a new EFProductRepository object should be created 
             // each time the IProductRepository interface is needed)
-            services.AddTransient<IProductRepository, TemporaryProductRepository>();
+            services.AddTransient<IProductRepository, EFProductRepository>();
             // set up shared objects
             services.AddMvc();
         }
