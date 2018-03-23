@@ -1,12 +1,13 @@
 ﻿@*the view will receive a sequence of Product
-objects from the action method as its model data*@
-@model IEnumerable<Product>
-@foreach (var p in Model)
-{
-<div>
-    @p.Name @p.Price.ToString("c")
-    <br>@p.Description
-    <br> 
-</div>
+    objects from the action method as its model data*@
+@model ProductsListViewModel
 
+@foreach (var p in Model.Products)
+{
+    <div style="margin-bottom: 15px;">
+        @p.Name @p.Price.ToString("c")
+        <br>@p.Description
+    </div>
 }
+
+<div page-model="@Model.PagingInfo" page-action="List"></div>

@@ -1,5 +1,8 @@
 ﻿@*use the types in the OnlineStore.Models namespace in views
     without needing to refer to the namespace*@
 @using OnlineStore.Models
+@using OnlineStore.Models.ViewModels
 @*enables the built-in tag helpers*@
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@*look for tag helper classes in the OnlineStore.Infrastructure namespace*@
+@addTagHelper OnlineStore.Infrastructure.*, OnlineStore
