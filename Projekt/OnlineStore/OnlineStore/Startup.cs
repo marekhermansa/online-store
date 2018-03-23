@@ -58,6 +58,8 @@ namespace OnlineStore
                 name: "default",
                 template: "{controller=Product}/{action=List}/{id?}");
             });
+            // seed the database when the application starts
+            SeedData.EnsurePopulated(app);
         }
     }
 }
