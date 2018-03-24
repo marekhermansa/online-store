@@ -14,6 +14,9 @@ namespace OnlineStore.Tests
         [Fact]
         public void Can_Generate_Page_Links()
         {
+            // Arrange
+            // Act
+            // Assert
         }
     }
 }
