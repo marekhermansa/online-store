@@ -12,7 +12,7 @@ namespace OnlineStore.Controllers
     {
         // dependecy injection
         private IProductRepository repository;
-        public int PageSize = 4;
+        public int PageSize = 5;
 
         public ProductController(IProductRepository repo)
         {
