@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Razor.TagHelpers;
 using OnlineStore.Models.ViewModels;
+using System.Collections.Generic;
 
 namespace OnlineStore.Infrastructure
 {
@@ -26,6 +27,12 @@ namespace OnlineStore.Infrastructure
         public ViewContext ViewContext { get; set; }
         public PagingInfo PageModel { get; set; }
         public string PageAction { get; set; }
+
+        // specify a prefix for attribute names on the element
+        [HtmlAttributeName(DictionaryAttributePrefix = "page-url-")]
+        public Dictionary<string, object> PageUrlValues { get; set; }
+            = new Dictionary<string, object>();
+
         public override void Process(TagHelperContext context,
         TagHelperOutput output)
         {
@@ -34,6 +41,10 @@ namespace OnlineStore.Infrastructure
             for (int i = 1; i <= PageModel.TotalPages; i++)
             {
                 TagBuilder tag = new TagBuilder("a");
+                
+                PageUrlValues["productPage"] = i;
+                tag.Attributes["href"] = urlHelper.Action(PageAction, PageUrlValues);
+
                 tag.Attributes["href"] = urlHelper.Action(PageAction,
                 new { productPage = i });
                 tag.InnerHtml.Append(i.ToString());

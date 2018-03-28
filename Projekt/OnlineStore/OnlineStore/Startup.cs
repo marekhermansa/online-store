@@ -6,9 +6,9 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
-using OnlineStore.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
+using OnlineStore.Models;
 
 namespace OnlineStore
 {
@@ -17,10 +17,9 @@ namespace OnlineStore
         // receive details of the configuration data 
         // contained in the appsettings.json file and 
         // use it to configure Entity Framework Core
-        public Startup(IConfiguration configuration)
-        {
+        public Startup(IConfiguration configuration) => 
             Configuration = configuration;
-        }
+
         public IConfiguration Configuration { get; }
 
         public void ConfigureServices(IServiceCollection services)
@@ -54,9 +53,42 @@ namespace OnlineStore
             // send requests that arrive for the root URL of the application 
             // (http://mysite /) to the List action method in the ProductController class
             app.UseMvc(routes => {
+
+                // the specified page of items from the specified category
                 routes.MapRoute(
-                name: "default",
-                template: "{controller=Product}/{action=List}/{id?}");
+                    name: null,
+                    template: "{category}/Page{productPage:int}",
+                    defaults: new { controller = "Product", action = "List" }
+                );
+
+                // the specified page of items from all categories
+                routes.MapRoute(
+                    name: null,
+                    template: "Page{productPage:int}",
+                    defaults: new { controller = "Product",
+                        action = "List", productPage = 1 }
+                );
+
+                // the first page of items from a specific category
+                routes.MapRoute(
+                    name: null,
+                    template: "{category}",
+                    defaults: new { controller = "Product",
+                        action = "List", productPage = 1 }
+                );
+
+                // the first page of products from all categories
+                routes.MapRoute(
+                    name: null,
+                    template: "",
+                    defaults: new { controller = "Product",
+                    action = "List", productPage = 1 }
+                );
+
+                routes.MapRoute(
+                    name: null, 
+                    template: "{controller}/{action}/{id?}"
+                );
             });
             // seed the database when the application starts
             SeedData.EnsurePopulated(app);

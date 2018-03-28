@@ -12,7 +12,7 @@ namespace OnlineStore.Controllers
     {
         // dependecy injection
         private IProductRepository repository;
-        public int PageSize = 5;
+        public int PageSize = 6;
 
         public ProductController(IProductRepository repo)
         {
@@ -21,9 +21,10 @@ namespace OnlineStore.Controllers
 
         //// render the default view for the action method
         // pass a ProductsListViewModel object as the model data to the view
-        public ViewResult List(int productPage = 1)
+        public ViewResult List(string category, int productPage = 1)
             => View(new ProductsListViewModel{
                 Products = repository.Products
+                    .Where(p => category == null || p.Category == category)
                     .OrderBy(p => p.ProductID)
                     .Skip((productPage - 1) * PageSize)
                     .Take(PageSize),
@@ -31,8 +32,8 @@ namespace OnlineStore.Controllers
                     CurrentPage = productPage,
                     ItemsPerPage = PageSize,
                     TotalItems = repository.Products.Count()
-                }
+                },
+                CurrentCategory = category
             });
-
     }
 }
