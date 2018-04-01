@@ -35,6 +35,11 @@ namespace OnlineStore
             services.AddTransient<IProductRepository, EFProductRepository>();
             // set up shared objects
             services.AddMvc();
+            // enable cart session (services):
+            // set up the in-memory data store
+            services.AddMemoryCache();
+            // register the services used to access session data
+            services.AddSession();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -49,6 +54,10 @@ namespace OnlineStore
             app.UseStatusCodePages();
             // enable support for serving static content from the wwwroot folder
             app.UseStaticFiles();
+            // enable cart session (middleware):
+            // allows the session system to automatically associate 
+            // requests with sessions when they arrive from the client
+            app.UseSession();
             // enable ASP.NET Core MVC;
             // send requests that arrive for the root URL of the application 
             // (http://mysite /) to the List action method in the ProductController class
