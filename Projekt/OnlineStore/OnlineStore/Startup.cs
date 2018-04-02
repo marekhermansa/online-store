@@ -33,6 +33,11 @@ namespace OnlineStore
             // (a new EFProductRepository object should be created 
             // each time the IProductRepository interface is needed)
             services.AddTransient<IProductRepository, EFProductRepository>();
+            // service for the Cart class
+            services.AddScoped<Cart>(sp => SessionCart.GetCart(sp));
+            // use the HttpContextAccessor class when implementations 
+            // of the IHttpContextAccessor interface are required
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             // set up shared objects
             services.AddMvc();
             // enable cart session (services):
