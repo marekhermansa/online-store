@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace OnlineStore.Models
 {
-    public class TemporaryProductRepository : IProductRepository
+    public class TemporaryProductRepository /* : IProductRepository */
     {
         public IQueryable<Product> Products
         {
