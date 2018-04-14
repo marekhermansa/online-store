@@ -11,8 +11,8 @@ using System;
 namespace OnlineStore.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20180414161908_Orders")]
-    partial class Orders
+    [Migration("20180414165201_ShippedOrders")]
+    partial class ShippedOrders
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -56,6 +56,8 @@ namespace OnlineStore.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired();
+
+                    b.Property<bool>("Shipped");
 
                     b.Property<bool>("ShippingInsurance");
 

@@ -13,6 +13,8 @@ namespace OnlineStore.Models
         public int OrderID { get; set; }
         [BindNever]
         public ICollection<CartLine> Lines { get; set; }
+        [BindNever]
+        public bool Shipped { get; set; }
         [Required(ErrorMessage = "Enter a name")]
         public string Name { get; set; }
         [Required(ErrorMessage = "Enter the first address line")]
