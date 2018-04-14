@@ -38,6 +38,8 @@ namespace OnlineStore
             // use the HttpContextAccessor class when implementations 
             // of the IHttpContextAccessor interface are required
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            // register the order repository as a service
+            services.AddTransient<IOrderRepository, EFOrderRepository>();
             // set up shared objects
             services.AddMvc();
             // enable cart session (services):

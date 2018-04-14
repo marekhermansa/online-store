@@ -1,11 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace OnlineStore.Models
 {
-    public class IOrderRepository
+    public interface IOrderRepository
     {
+        IQueryable<Order> Orders { get; }
+        void SaveOrder(Order order);
     }
 }
+
+
