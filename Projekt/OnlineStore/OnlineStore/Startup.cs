@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
 using OnlineStore.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace OnlineStore
 {
@@ -27,6 +28,15 @@ namespace OnlineStore
             // set up Entity Framework Core within the ConfigureServices method
             services.AddDbContext<ApplicationDbContext>(options => 
             options.UseSqlServer(Configuration["Data:OnlineStoreProducts:ConnectionString"]));
+
+            services.AddDbContext<AppIdentityDbContext>(options =>
+            options.UseSqlServer(
+                Configuration["Data:OnlineStoreIdentity:ConnectionString"]));
+
+            services.AddIdentity<IdentityUser, IdentityRole>()
+            .AddEntityFrameworkStores<AppIdentityDbContext>()
+            .AddDefaultTokenProviders();
+
             // when a component (controller) needs an implementation 
             // of the IProductRepository interface, it should receive
             // an instance of the EFProductRepository class
@@ -65,6 +75,7 @@ namespace OnlineStore
             // allows the session system to automatically associate 
             // requests with sessions when they arrive from the client
             app.UseSession();
+            app.UseAuthentication();
             // enable ASP.NET Core MVC;
             // send requests that arrive for the root URL of the application 
             // (http://mysite /) to the List action method in the ProductController class
@@ -108,6 +119,7 @@ namespace OnlineStore
             });
             // seed the database when the application starts
             SeedData.EnsurePopulated(app);
+            IdentitySeedData.EnsurePopulated(app); // for admin account
         }
     }
 }
