@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using OnlineStore.Models;
 using Microsoft.AspNetCore.Authorization;
 
-namespace SportsStore.Controllers
+namespace OnlineStore.Controllers
 {
     [Authorize]
     public class AdminController : Controller
