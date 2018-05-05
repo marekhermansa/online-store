@@ -2,11 +2,22 @@
 <div>
     @if (Model.Lines.Count() > 0)
     {
-        <span>
+        <div>
             <b>Your cart:</b>
-            @Model.Lines.Sum(x => x.Quantity) item(s)
+            @Model.Lines.Sum(x => x.Quantity)
+            @if (Model.Lines.Sum(x => x.Quantity) == 1)
+            {
+                @:item 
+            }
+            else
+            {
+                @:items
+            }
+        </div>
+        <div>
+            <b>Total:</b>
             @Model.ComputeTotalValue().ToString("c")
-        </span>
+        </div>
     }
     <a asp-controller="Cart" asp-action="Index"
        asp-route-returnurl="@ViewContext.HttpContext.Request.PathAndQuery()">

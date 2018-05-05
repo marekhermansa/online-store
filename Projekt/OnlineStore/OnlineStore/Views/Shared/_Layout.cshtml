@@ -2,13 +2,16 @@
 
 <html>
 <head>
+    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>OnlineStore</title>
 </head>
 <body>
     <div>
         <div>
-            <a href="#">ONLINE STORE</a>
+            @*<a href="#">ONLINE STORE</a>*@
+            <a>ONLINE STORE</a>
+            <hr>
             <div>
                 @await Component.InvokeAsync("CartSummary")
             </div>

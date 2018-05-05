@@ -1,5 +1,16 @@
-﻿@model CartIndexViewModel
-<h2>Your Shopping Cart</h2>
+﻿<style>
+    table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+    th {
+        text-align: left;
+    }
+</style>
+
+@model CartIndexViewModel
+
+<h2>Shopping Cart</h2>
 <table>
     <thead>
         <tr>
@@ -12,25 +23,25 @@
     <tbody>
         @foreach (var line in Model.Cart.Lines)
         {
-        <tr>
-            <td class="text-center">@line.Quantity</td>
-            <td class="text-left">@line.Product.Name</td>
-            <td class="text-right">@line.Product.Price.ToString("c")</td>
-            <td class="text-right">
-                @((line.Quantity * line.Product.Price).ToString("c"))
-            </td>
-            <td>
-                <form asp-action="RemoveFromCart" method="post">
-                    <input type="hidden" name="ProductID"
-                           value="@line.Product.ProductID" />
-                    <input type="hidden" name="returnUrl"
-                           value="@Model.ReturnUrl" />
-                    <button type="submit">
-                        Remove
-                    </button>
-                </form>
-            </td>
-        </tr>
+            <tr>
+                <td class="text-center">@line.Quantity</td>
+                <td class="text-left">@line.Product.Name</td>
+                <td class="text-right">@line.Product.Price.ToString("c")</td>
+                <td class="text-right">
+                    @((line.Quantity * line.Product.Price).ToString("c"))
+                </td>
+                <td>
+                    <form asp-action="RemoveFromCart" method="post">
+                        <input type="hidden" name="ProductID"
+                               value="@line.Product.ProductID" />
+                        <input type="hidden" name="returnUrl"
+                               value="@Model.ReturnUrl" />
+                        <button type="submit">
+                            Remove
+                        </button>
+                    </form>
+                </td>
+            </tr>
         }
     </tbody>
     <tfoot>
@@ -43,6 +54,10 @@
     </tfoot>
 </table>
 <div>
-    <a href="@Model.ReturnUrl">Continue shopping</a>
-    <a asp-action="Checkout" asp-controller="Order">Checkout</a>
+    <div>
+        <a href="@Model.ReturnUrl">Continue shopping</a>
+    </div>
+    <div>
+        <a asp-action="Checkout" asp-controller="Order">Checkout</a>
+    </div>
 </div>

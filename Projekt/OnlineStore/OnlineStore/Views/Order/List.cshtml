@@ -1,9 +1,21 @@
-﻿@model IEnumerable<Order>
+﻿<style>
+    table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+
+    th {
+        text-align: left;
+    }
+</style>
+
+@model IEnumerable<Order>
 @{
     ViewBag.Title = "Orders";
-    //specifie a new layout (override the layout specified in the _ViewStart.cshtml)
+    //specify a new layout (override the layout specified in the _ViewStart.cshtml)
     Layout = "_AdminLayout";
 }
+
 @if (Model.Count() > 0)
 {
     <table class="table table-bordered table-striped">
@@ -19,7 +31,7 @@
                     <form asp-action="MarkShipped" method="post">
                         <input type="hidden" name="orderId" value="@o.OrderID" />
                         <button type="submit" class="btn btn-sm btn-danger">
-                            Ship
+                            ship
                         </button>
                     </form>
                 </td>
@@ -38,5 +50,5 @@
 }
 else
 {
-    <div class="text-center">No Unshipped Orders</div>
+    <div class="text-center">no unshipped orders</div>
 }

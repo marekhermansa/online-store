@@ -15,19 +15,20 @@ namespace OnlineStore
 {
     public class Startup
     {
+        public IConfiguration Configuration { get; }
+
         // receive details of the configuration data 
         // contained in the appsettings.json file and 
         // use it to configure Entity Framework Core
         public Startup(IConfiguration configuration) => 
             Configuration = configuration;
 
-        public IConfiguration Configuration { get; }
-
         public void ConfigureServices(IServiceCollection services)
         {
             // set up Entity Framework Core within the ConfigureServices method
             services.AddDbContext<ApplicationDbContext>(options => 
-            options.UseSqlServer(Configuration["Data:OnlineStoreProducts:ConnectionString"]));
+            options.UseSqlServer(
+                Configuration["Data:OnlineStoreProducts:ConnectionString"]));
 
             services.AddDbContext<AppIdentityDbContext>(options =>
             options.UseSqlServer(
@@ -43,13 +44,13 @@ namespace OnlineStore
             // (a new EFProductRepository object should be created 
             // each time the IProductRepository interface is needed)
             services.AddTransient<IProductRepository, EFProductRepository>();
+            // register the order repository as a service
+            services.AddTransient<IOrderRepository, EFOrderRepository>();
             // service for the Cart class
             services.AddScoped<Cart>(sp => SessionCart.GetCart(sp));
             // use the HttpContextAccessor class when implementations 
             // of the IHttpContextAccessor interface are required
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            // register the order repository as a service
-            services.AddTransient<IOrderRepository, EFOrderRepository>();
             // set up shared objects
             services.AddMvc();
             // enable cart session (services):
@@ -62,9 +63,7 @@ namespace OnlineStore
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             // set up an HTTP request processor
-
-            // display a page that shows detailed information about exceptions
-            // **Enable the developer exception page only when the app is running in the Development environment.**
+            
             app.UseDeveloperExceptionPage();
             // provide status code pages such as 404 Not Found
             // https://docs.microsoft.com/en-us/aspnet/core/fundamentals/error-handling
@@ -78,7 +77,7 @@ namespace OnlineStore
             app.UseAuthentication();
             // enable ASP.NET Core MVC;
             // send requests that arrive for the root URL of the application 
-            // (http://mysite /) to the List action method in the ProductController class
+            // (http://mysite/) to the List action method in the ProductController class
             app.UseMvc(routes => {
 
                 // the specified page of items from the specified category

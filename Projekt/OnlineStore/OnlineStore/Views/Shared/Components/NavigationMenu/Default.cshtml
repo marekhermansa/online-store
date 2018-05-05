@@ -1,26 +1,27 @@
 ﻿<style>
     .btn-primary {
-        color: red;
+        font-weight: bold;
     }
 </style>
 
 @model IEnumerable<string>
-<a class="btn btn-block btn-secondary"
-   asp-action="List"
+<a asp-action="List"
    asp-controller="Product"
    asp-route-category="">
-    Home
+    All
 </a>
 
 @foreach (string category in Model)
 {
-    <a> | </a>
-    <a class="btn btn-block
+    @*<a> | </a>*@
+    <div>
+        <a class="btn btn-block
         @(category == ViewBag.SelectedCategory ? "btn-primary": "btn-secondary")"
-       asp-action="List"
-       asp-controller="Product"
-       asp-route-category="@category"
-       asp-route-productPage="1">
-        @category 
-    </a>
+           asp-action="List"
+           asp-controller="Product"
+           asp-route-category="@category"
+           asp-route-productPage="1">
+            @category
+        </a>
+    </div>
 }

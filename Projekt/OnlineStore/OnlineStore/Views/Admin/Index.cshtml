@@ -1,4 +1,15 @@
-﻿@model IEnumerable<Product>
+﻿<style>
+    table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+
+    th {
+        text-align: left;
+    }
+</style>
+
+@model IEnumerable<Product>
 @{
     ViewBag.Title = "All Products";
     Layout = "_AdminLayout";
