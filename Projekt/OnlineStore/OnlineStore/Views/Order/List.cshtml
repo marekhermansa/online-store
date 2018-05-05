@@ -9,7 +9,7 @@
     }
 </style>
 
-@model IEnumerable<Order>
+@model IEnumerable<OnlineStore.Models.Order>
 @{
     ViewBag.Title = "Orders";
     //specify a new layout (override the layout specified in the _ViewStart.cshtml)
@@ -20,7 +20,7 @@
 {
     <table class="table table-bordered table-striped">
         <tr><th>Name</th><th>Zip</th><th colspan="2">Details</th><th></th></tr>
-        @foreach (Order o in Model)
+        @foreach (OnlineStore.Models.Order o in Model)
         {
             <tr>
                 <td>@o.Name</td>
@@ -36,7 +36,7 @@
                     </form>
                 </td>
             </tr>
-            @foreach (CartLine line in o.Lines)
+            @foreach (OnlineStore.Models.CartLine line in o.Lines)
             {
                 <tr>
                     <td colspan="2"></td>

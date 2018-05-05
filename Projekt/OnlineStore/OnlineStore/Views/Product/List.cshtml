@@ -5,11 +5,6 @@
 @foreach (var p in Model.Products)
 {
     @Html.Partial("ProductSummary", p)
-    // former, to delete:
-    //<div style="margin-bottom: 15px;">
-    //    @p.Name @p.Price.ToString("c")
-    //    <br>@p.Description
-    //</div>
 }
 
 <div page-model="@Model.PagingInfo" page-action="List" page-classes-enabled="true"

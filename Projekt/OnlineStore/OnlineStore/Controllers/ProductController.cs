@@ -10,11 +10,16 @@ namespace OnlineStore.Controllers
 {
     public class ProductController : Controller
     {
-        public int PageSize = 4;
         private IProductRepository repository;
 
         public ProductController(IProductRepository repository) 
             => this.repository = repository;
+
+        //public ViewResult List() => View(repository.Products);
+
+        //================================================
+
+        public int PageSize = 4;
 
         public ViewResult List(string category, int productPage = 1)
             => View(new ProductsListViewModel

@@ -25,7 +25,6 @@ namespace OnlineStore
 
         public void ConfigureServices(IServiceCollection services)
         {
-            // set up Entity Framework Core within the ConfigureServices method
             services.AddDbContext<ApplicationDbContext>(options => 
             options.UseSqlServer(
                 Configuration["Data:OnlineStoreProducts:ConnectionString"]));
