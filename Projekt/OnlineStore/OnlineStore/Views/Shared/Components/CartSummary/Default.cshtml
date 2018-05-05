@@ -1,4 +1,4 @@
-﻿@model Cart
+﻿@model OnlineStore.Models.Cart
 <div>
     @if (Model.Lines.Count() > 0)
     {
@@ -19,8 +19,8 @@
             @Model.ComputeTotalValue().ToString("c")
         </div>
     }
-    <a asp-controller="Cart" asp-action="Index"
-       asp-route-returnurl="@ViewContext.HttpContext.Request.PathAndQuery()">
-        <i>checkout</i>
-    </a>
+        <a asp-controller="Cart" asp-action="Index"
+           asp-route-returnurl="@OnlineStore.Infrastructure.UrlExtensions.PathAndQuery(ViewContext.HttpContext.Request)">
+            <i>checkout</i>
+        </a>
 </div>

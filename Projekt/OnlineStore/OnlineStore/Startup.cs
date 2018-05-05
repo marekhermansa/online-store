@@ -38,6 +38,8 @@ namespace OnlineStore
             .AddEntityFrameworkStores<AppIdentityDbContext>()
             .AddDefaultTokenProviders();
 
+            // set up shared objects
+            services.AddMvc();
             // when a component (controller) needs an implementation 
             // of the IProductRepository interface, it should receive
             // an instance of the EFProductRepository class
@@ -51,8 +53,6 @@ namespace OnlineStore
             // use the HttpContextAccessor class when implementations 
             // of the IHttpContextAccessor interface are required
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            // set up shared objects
-            services.AddMvc();
             // enable cart session (services):
             // set up the in-memory data store
             services.AddMemoryCache();
@@ -63,22 +63,18 @@ namespace OnlineStore
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             // set up an HTTP request processor
-            
-            app.UseDeveloperExceptionPage();
-            // provide status code pages such as 404 Not Found
+
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+            app.UseStaticFiles();
             // https://docs.microsoft.com/en-us/aspnet/core/fundamentals/error-handling
             app.UseStatusCodePages();
-            // enable support for serving static content from the wwwroot folder
-            app.UseStaticFiles();
-            // enable cart session (middleware):
-            // allows the session system to automatically associate 
-            // requests with sessions when they arrive from the client
             app.UseSession();
             app.UseAuthentication();
-            // enable ASP.NET Core MVC;
-            // send requests that arrive for the root URL of the application 
-            // (http://mysite/) to the List action method in the ProductController class
-            app.UseMvc(routes => {
+            app.UseMvc(routes => 
+            {
 
                 // the specified page of items from the specified category
                 routes.MapRoute(
