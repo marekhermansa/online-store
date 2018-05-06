@@ -9,12 +9,13 @@ namespace OnlineStore.Models
     {
         private ApplicationDbContext context;
 
-        public EFProductRepository(ApplicationDbContext ctx)
+        public EFProductRepository(ApplicationDbContext context)
         {
-            context = ctx;
+            this.context = context;
         }
 
         public IQueryable<Product> Products => context.Products;
+
 
         public void SaveProduct(Product product)
         {
