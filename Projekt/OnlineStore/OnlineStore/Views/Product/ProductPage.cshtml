@@ -1,0 +1,30 @@
+﻿<style>
+    table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+
+    th {
+        text-align: left;
+    }
+</style>
+
+@model OnlineStore.Models.ViewModels.ProductIndexViewModel
+
+<h2>@Model.Product.Name
+
+<br><img src="@Model.Product.ImageUrl" alt="@Model.Product.Name" title="@Model.Product.Name" height="192" width="192" />
+<br>@Model.Product.Description
+<br>@Model.Product.Price.ToString("c")
+
+<form id="@Model.Product.ProductID" asp-action="AddToCart"
+      asp-controller="Cart" method="post">
+    <input type="hidden" asp-for="@Model.Product.ProductID" />
+    <input type="hidden" name="returnUrl"
+           value="@Model.ReturnUrl" />
+    <button type="submit">
+        Add to cart
+    </button>
+</form>
+
+<br><a href="@Model.ReturnUrl">Continue shopping</a>

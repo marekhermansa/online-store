@@ -10,7 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="wwwroot\images\img1.jpg" />
+    <Folder Include="wwwroot\images\" />
   </ItemGroup>
 
 </Project>

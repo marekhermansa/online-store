@@ -38,5 +38,29 @@ namespace OnlineStore.Controllers
                 },
                 CurrentCategory = category
             });
+
+        private Product product;
+
+        //public ViewResult Index(string returnUrl)
+        //{
+        //    return View(new ProductIndexViewModel
+        //    {
+        //        Product = product,
+        //        ReturnUrl = returnUrl
+        //    });
+        //}
+        public ViewResult /*RedirectToActionResult*/ProductPage(int productId, string returnUrl)
+        {
+            Product product = repository.Products
+            .FirstOrDefault(p => p.ProductID == productId);
+
+            return View(new ProductIndexViewModel
+            {
+                Product = product,
+                ReturnUrl = returnUrl
+            });
+
+            //return RedirectToAction("Index", new { returnUrl });
+        }
     }
 }

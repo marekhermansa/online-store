@@ -14,7 +14,16 @@
 
 <div style="margin-bottom: 15px;">
     <div>
-        <b>@Model.Name</b>
+        <form id="@Model.ProductID" asp-action="ProductPage"
+              asp-controller="Product" method="post">
+            <input type="hidden" asp-for="ProductID" />
+            <input type="hidden" name="returnUrl"
+                   value="@OnlineStore.Infrastructure.UrlExtensions.PathAndQuery(ViewContext.HttpContext.Request)" />
+            <button type="submit">
+                <b>@Model.Name</b>
+            </button>
+        </form>
+
         <br><img src="@Model.ImageUrl" alt="@Model.Name" title="@Model.Name" height="72" width="72" />
         @*<span style="float:right"> @Model.Price.ToString("c") </span>*@
         <br>@Model.Description
@@ -30,5 +39,4 @@
             Add to cart
         </button>
     </form>
-
 </div>
