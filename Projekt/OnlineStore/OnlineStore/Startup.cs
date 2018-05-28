@@ -38,7 +38,7 @@ namespace OnlineStore
             .AddDefaultTokenProviders();
 
             //for testing purpose only
-            services.AddTransient<IProductRepository, TemporaryProductRepository>();
+            //services.AddTransient<IProductRepository, TemporaryProductRepository>();
 
             // set up shared objects
             services.AddMvc();

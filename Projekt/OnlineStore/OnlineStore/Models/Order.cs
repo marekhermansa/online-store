@@ -23,6 +23,5 @@ namespace OnlineStore.Models
         [Required(ErrorMessage = "Enter a city name")]
         public string City { get; set; }
         public string Zip { get; set; }
-        public bool ShippingInsurance { get; set; }
     }
 }
