@@ -81,7 +81,12 @@ namespace OnlineStore
                 routes.MapRoute(
                         name: null,
                         template: "{category}/Page{productPage:int}",
-                        defaults: new { controller = "Product", action = "List" }
+                        defaults: new
+                        {
+                            controller = "Product",
+                            action = "List",
+                            //filter = ""
+                        }
                     );
 
                 //the specified page of items from all categories
@@ -92,7 +97,8 @@ namespace OnlineStore
                     {
                         controller = "Product",
                         action = "List",
-                        productPage = 1
+                        productPage = 1,
+                        //filter = ""
                     }
                 );
 
@@ -104,7 +110,8 @@ namespace OnlineStore
                     {
                         controller = "Product",
                         action = "List",
-                        productPage = 1
+                        productPage = 1,
+                        //filter = ""
                     }
                 );
 
@@ -116,7 +123,8 @@ namespace OnlineStore
                     {
                         controller = "Product",
                         action = "List",
-                        productPage = 1
+                        productPage = 1,
+                        //filter = ""
                     }
                 );
 

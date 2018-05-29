@@ -1,0 +1,28 @@
+﻿@*<style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+
+        th {
+            text-align: left;
+        }
+    </style>*@
+
+@model OnlineStore.Models.Product
+
+<h2>@Model.Name</h2>
+
+<br><img src="@Model.ImageUrl" alt="@Model.Name" title="@Model.Name" height="192" width="192" />
+<br>@Model.Description
+<br>@Model.Price.ToString("c")
+
+<form id="@Model.ProductID" asp-action="AddToCart"
+      asp-controller="Cart" method="post">
+    <input type="hidden" asp-for="@Model.ProductID" />
+    <input type="hidden" name="returnUrl"
+           value="@Model" />
+    <button type="submit">
+        Add to cart
+    </button>
+</form>

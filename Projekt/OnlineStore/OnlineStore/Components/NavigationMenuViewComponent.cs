@@ -18,6 +18,5 @@ namespace OnlineStore.Components {
                 .Distinct()
                 .OrderBy(x => x));
         }
-        //public string Invoke() => "the navigation view component";
     }
 }

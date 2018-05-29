@@ -19,37 +19,88 @@ namespace OnlineStore.Controllers
 
         public int PageSize = 4;
 
-        public ViewResult List(string category, int productPage = 1) =>
-            View(new ProductsListViewModel
-            {
-                Products = repository.Products
-                    .Where(p => category == null || p.Category == category)
-                    .OrderBy(p => p.ProductID)
-                    .Skip((productPage - 1) * PageSize)
-                    .Take(PageSize),
-                PagingInfo = new PagingInfo
+        public ViewResult List(string category, int productPage = 1, string filter = "default")
+        {
+            if (filter == "default")
+                return View(new ProductsListViewModel
                 {
-                    CurrentPage = productPage,
-                    ItemsPerPage = PageSize,
-                    TotalItems = category == null ?
-                        repository.Products.Count() :
-                        repository.Products.Where(e =>
-                        e.Category == category).Count()
-                },
-                CurrentCategory = category
-            });
+                    Products = repository.Products
+                        .Where(p => category == null || p.Category == category)
+                        .OrderBy(p => p.ProductID) //refactor
+                        .Skip((productPage - 1) * PageSize)
+                        .Take(PageSize),
+                    PagingInfo = new PagingInfo
+                    {
+                        CurrentPage = productPage,
+                        ItemsPerPage = PageSize,
+                        TotalItems = category == null ?
+                            repository.Products.Count() :
+                            repository.Products.Where(e =>
+                            e.Category == category).Count()
+                    },
+                    CurrentCategory = category
+                });
+            else if (filter == "priceLowest")
+                return View(new ProductsListViewModel
+                {
+                    Products = repository.Products
+                        .Where(p => category == null || p.Category == category)
+                        .OrderBy(p => p.Price) //refactor
+                        .Skip((productPage - 1) * PageSize)
+                        .Take(PageSize),
+                    PagingInfo = new PagingInfo
+                    {
+                        CurrentPage = productPage,
+                        ItemsPerPage = PageSize,
+                        TotalItems = category == null ?
+                            repository.Products.Count() :
+                            repository.Products.Where(e =>
+                            e.Category == category).Count()
+                    },
+                    CurrentCategory = category
+                });
+            else //if (filter == "priceHighest")
+                return View(new ProductsListViewModel
+                {
+                    Products = repository.Products
+                        .Where(p => category == null || p.Category == category)
+                        .OrderByDescending(p => p.Price) //refactor
+                        .Skip((productPage - 1) * PageSize)
+                        .Take(PageSize),
+                    PagingInfo = new PagingInfo
+                    {
+                        CurrentPage = productPage,
+                        ItemsPerPage = PageSize,
+                        TotalItems = category == null ?
+                            repository.Products.Count() :
+                            repository.Products.Where(e =>
+                            e.Category == category).Count()
+                    },
+                    CurrentCategory = category
+                });
+        }
 
-        private Product product;
-
-        //public ViewResult Index(string returnUrl)
-        //{
-        //    return View(new ProductIndexViewModel
+        //public ViewResult List(string category, int productPage = 1, string filter = "default") =>
+        //    View(new ProductsListViewModel
         //    {
-        //        Product = product,
-        //        ReturnUrl = returnUrl
+        //        Products = repository.Products
+        //            .Where(p => category == null || p.Category == category)
+        //            .OrderBy(p => p.ProductID)
+        //            .Skip((productPage - 1) * PageSize)
+        //            .Take(PageSize),
+        //        PagingInfo = new PagingInfo
+        //        {
+        //            CurrentPage = productPage,
+        //            ItemsPerPage = PageSize,
+        //            TotalItems = category == null ?
+        //                repository.Products.Count() :
+        //                repository.Products.Where(e =>
+        //                e.Category == category).Count()
+        //        },
+        //        CurrentCategory = category
         //    });
-        //}
-        public ViewResult /*RedirectToActionResult*/ProductPage(int productId, string returnUrl)
+
+        public ViewResult ProductPage(int productId, string returnUrl)
         {
             Product product = repository.Products
             .FirstOrDefault(p => p.ProductID == productId);
@@ -59,8 +110,14 @@ namespace OnlineStore.Controllers
                 Product = product,
                 ReturnUrl = returnUrl
             });
-
-            //return RedirectToAction("Index", new { returnUrl });
         }
+
+        //public ViewResult Details(string productName)
+        //{
+        //    Product product = repository.Products
+        //    .FirstOrDefault(p => p.Name == productName);
+
+        //    return View("Details",product);
+        //}
     }
 }

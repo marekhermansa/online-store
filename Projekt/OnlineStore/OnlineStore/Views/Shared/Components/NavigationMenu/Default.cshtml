@@ -4,6 +4,8 @@
     }
 </style>
 
+<b>Shop by Category</b>
+<br>
 @model IEnumerable<string>
 <a asp-action="List"
    asp-controller="Product"
@@ -19,8 +21,41 @@
            asp-action="List"
            asp-controller="Product"
            asp-route-category="@category"
-           asp-route-productPage="1">
+           asp-route-productPage="1"
+           asp-route-filter="default">
             @category
         </a>
     </div>
 }
+
+<hr>
+Sort:
+
+<div>
+    <a class="btn btn-block"
+       asp-action="List"
+       asp-controller="Product"
+       asp-route-category="@ViewBag.SelectedCategory"
+       asp-route-productPage="1"
+       asp-route-filter="priceLowest">
+        Price Lowest
+    </a>
+</div>
+<div>
+    <a class="btn btn-block"
+       asp-action="List"
+       asp-controller="Product"
+       asp-route-category="@ViewBag.SelectedCategory"
+       asp-route-productPage="1"
+       asp-route-filter="priceHighest">
+        Price Highest
+    </a>
+</div>
+
+@*<div>
+        <a class="btn btn-block"
+           asp-action="List"
+           asp-controller="Product">
+           Lowest Price
+        </a>
+    </div>*@

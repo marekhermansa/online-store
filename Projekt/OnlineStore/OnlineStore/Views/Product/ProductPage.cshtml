@@ -1,4 +1,4 @@
-﻿<style>
+﻿@*<style>
     table, th, td {
         border: 1px solid black;
         border-collapse: collapse;
@@ -7,11 +7,11 @@
     th {
         text-align: left;
     }
-</style>
+</style>*@
 
 @model OnlineStore.Models.ViewModels.ProductIndexViewModel
 
-<h2>@Model.Product.Name
+<h2>@Model.Product.Name</h2>
 
 <br><img src="@Model.Product.ImageUrl" alt="@Model.Product.Name" title="@Model.Product.Name" height="192" width="192" />
 <br>@Model.Product.Description
