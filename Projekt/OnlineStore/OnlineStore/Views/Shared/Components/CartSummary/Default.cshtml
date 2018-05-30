@@ -1,26 +1,29 @@
 ﻿@model OnlineStore.Models.Cart
-<div>
-    @if (Model.Lines.Count() > 0)
-    {
-        <div>
-            <b>Your cart:</b>
-            @Model.Lines.Sum(x => x.Quantity)
-            @if (Model.Lines.Sum(x => x.Quantity) == 1)
-            {
-                @:item 
-            }
-            else
-            {
-                @:items
-            }
-        </div>
-        <div>
-            <b>Total:</b>
-            @Model.ComputeTotalValue().ToString("c")
-        </div>
-    }
+
+    <link rel="stylesheet" asp-href-include="css/style.css" />
+
+    <div>
+        @if (Model.Lines.Count() > 0)
+        {
+            <div>
+                <b>Your cart:</b>
+                @Model.Lines.Sum(x => x.Quantity)
+                @if (Model.Lines.Sum(x => x.Quantity) == 1)
+                {
+                    @:item
+                }
+                else
+                {
+                    @:items
+                }
+            </div>
+            <div>
+                <b>Total:</b>
+                @Model.ComputeTotalValue().ToString("c")
+            </div>
+        }
         <a asp-controller="Cart" asp-action="Index"
            asp-route-returnurl="@OnlineStore.Infrastructure.UrlExtensions.PathAndQuery(ViewContext.HttpContext.Request)">
             <i>checkout</i>
         </a>
-</div>
+    </div>

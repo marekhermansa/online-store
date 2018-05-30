@@ -4,13 +4,15 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" asp-href-include="css/style.css" />
     <title>OnlineStore</title>
 </head>
 <body>
     <div>
         <div>
+            <img src="~/images/logo1.jpg" alt="logo" title="logo" height="72" width="290" />
             @*<a href="#">ONLINE STORE</a>*@
-            <a>ONLINE STORE</a>
+            @*<a>ONLINE STORE</a>*@
             <hr>
             <div>
                 @await Component.InvokeAsync("CartSummary")

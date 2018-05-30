@@ -1,5 +1,7 @@
 ﻿@model OnlineStore.Models.ViewModels.ProductsListViewModel
 
+<link rel="stylesheet" asp-href-include="css/style.css" />
+
 @foreach (var p in Model.Products)
 {
     @Html.Partial("ProductSummary", p)
