@@ -20,6 +20,7 @@ namespace OnlineStore.Controllers
             userManager = userMgr;
             signInManager = signInMgr;
         }
+        public ViewResult Index() => View(userManager.Users); //new
         [AllowAnonymous]
         public ViewResult Login(string returnUrl)
         {

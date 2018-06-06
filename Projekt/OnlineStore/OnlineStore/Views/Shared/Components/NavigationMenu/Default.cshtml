@@ -1,15 +1,16 @@
-﻿<style>
+﻿@*<style>
     .btn-primary {
         font-weight: bold;
     }
-</style>
+</style>*@
 
-<link rel="stylesheet" asp-href-include="css/style.css" />
+@*<link rel="stylesheet" asp-href-include="css/style.css" />*@
 
 <b>Shop by Category</b>
 <br>
 @model IEnumerable<string>
-<a asp-action="List"
+<a class="btn btn-block btn-secondary"
+   asp-action="List"
    asp-controller="Product"
    asp-route-category="">
     All
@@ -17,7 +18,7 @@
 
 @foreach (string category in Model)
 {
-    <div>
+    @*<div>*@
         <a class="btn btn-block
         @(category == ViewBag.SelectedCategory ? "btn-primary": "btn-secondary")"
            asp-action="List"
@@ -27,7 +28,7 @@
            asp-route-filter="default">
             @category
         </a>
-    </div>
+    @*</div>*@
 }
 
 <hr>

@@ -8,26 +8,33 @@
             text-align: left;
         }
     </style>*@
-<link rel="stylesheet" asp-href-include="css/style.css" />
+@*<link rel="stylesheet" asp-href-include="css/style.css" />*@
+<link href="/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
 
 @model OnlineStore.Models.Product
 
 
-<div style="margin-bottom: 15px;">
-    <div>
+<div class="card card-outline-primary m-1 p-1">
+    <div class="bg-faded p-1">
         <b>@Model.Name</b>
-        <br><img src="@Model.ImageUrl" alt="@Model.Name" title="@Model.Name" height="72" width="72" />
-        @*<span style="float:right"> @Model.Price.ToString("c") </span>*@
-        <br>@Model.Description
-        <br>@Model.Price.ToString("c")
-    </div>
+            <br><img src="@Model.ImageUrl" alt="@Model.Name" title="@Model.Name" height="100" width="100" />
+   
+            @*<span style="float:right"> @Model.Price.ToString("c") </span>*@
+                <span class="card-text p-1">
+                    <br>@Model.Description
+                    <span class="badge badge-default badge-primary" style="float:right">
+                        @Model.Price.ToString("c")
+                    </span>
+                </span>
+</div>
 
     <form id="@Model.ProductID" asp-action="ProductPage"
           asp-controller="Product" method="post">
         <input type="hidden" asp-for="ProductID" />
         <input type="hidden" name="returnUrl"
                value="@OnlineStore.Infrastructure.UrlExtensions.PathAndQuery(ViewContext.HttpContext.Request)" />
-        <button type="submit">
+        <button type="submit"
+                class="btn btn-success btn-sm pull-right" style="float:right">
             Details
         </button>
     </form>
@@ -43,7 +50,8 @@
         <input type="hidden" asp-for="ProductID" />
         <input type="hidden" name="returnUrl"
                value="@OnlineStore.Infrastructure.UrlExtensions.PathAndQuery(ViewContext.HttpContext.Request)" />
-        <button type="submit">
+        <button type="submit"
+                class="btn btn-success btn-sm pull-right" style="float:right">
             Add to cart
         </button>
     </form>
