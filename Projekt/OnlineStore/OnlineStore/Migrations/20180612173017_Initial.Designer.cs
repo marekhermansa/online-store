@@ -11,14 +11,14 @@ using System;
 namespace OnlineStore.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20170816162555_ShippedOrders")]
-    partial class ShippedOrders
+    [Migration("20180612173017_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.0.0-rtm-26452")
+                .HasAnnotation("ProductVersion", "2.0.1-rtm-125")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("OnlineStore.Models.CartLine", b =>
@@ -49,25 +49,15 @@ namespace OnlineStore.Migrations
                     b.Property<string>("City")
                         .IsRequired();
 
-                    b.Property<string>("Country")
-                        .IsRequired();
-
-                    b.Property<bool>("GiftWrap");
-
                     b.Property<string>("Line1")
                         .IsRequired();
 
                     b.Property<string>("Line2");
 
-                    b.Property<string>("Line3");
-
                     b.Property<string>("Name")
                         .IsRequired();
 
                     b.Property<bool>("Shipped");
-
-                    b.Property<string>("State")
-                        .IsRequired();
 
                     b.Property<string>("Zip");
 
@@ -81,11 +71,16 @@ namespace OnlineStore.Migrations
                     b.Property<int>("ProductID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Category");
+                    b.Property<string>("Category")
+                        .IsRequired();
 
-                    b.Property<string>("Description");
+                    b.Property<string>("Description")
+                        .IsRequired();
 
-                    b.Property<string>("Name");
+                    b.Property<string>("ImageUrl");
+
+                    b.Property<string>("Name")
+                        .IsRequired();
 
                     b.Property<decimal>("Price");
 

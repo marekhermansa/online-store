@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace OnlineStore.Migrations
 {
-    public partial class Orders : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,13 +13,14 @@ namespace OnlineStore.Migrations
                 name: "Orders",
                 columns: table => new
                 {
-                    OrderID = table.Column<int>(type: "int", nullable: false)
+                    OrderID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    City = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Line1 = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Line2 = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Zip = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    City = table.Column<string>(nullable: false),
+                    Line1 = table.Column<string>(nullable: false),
+                    Line2 = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(nullable: false),
+                    Shipped = table.Column<bool>(nullable: false),
+                    Zip = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -27,14 +28,31 @@ namespace OnlineStore.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Products",
+                columns: table => new
+                {
+                    ProductID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Category = table.Column<string>(nullable: false),
+                    Description = table.Column<string>(nullable: false),
+                    ImageUrl = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(nullable: false),
+                    Price = table.Column<decimal>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Products", x => x.ProductID);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "CartLine",
                 columns: table => new
                 {
-                    CartLineID = table.Column<int>(type: "int", nullable: false)
+                    CartLineID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    OrderID = table.Column<int>(type: "int", nullable: true),
-                    ProductID = table.Column<int>(type: "int", nullable: true),
-                    Quantity = table.Column<int>(type: "int", nullable: false)
+                    OrderID = table.Column<int>(nullable: true),
+                    ProductID = table.Column<int>(nullable: true),
+                    Quantity = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -71,6 +89,9 @@ namespace OnlineStore.Migrations
 
             migrationBuilder.DropTable(
                 name: "Orders");
+
+            migrationBuilder.DropTable(
+                name: "Products");
         }
     }
 }
