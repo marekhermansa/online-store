@@ -1,27 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Configuration;
-using Microsoft.EntityFrameworkCore;
-using OnlineStore.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using OnlineStore.Models;
 
 namespace OnlineStore
 {
     public class Startup
     {
-        public IConfiguration Configuration { get; }
 
         // receive details of the configuration data 
         // contained in the appsettings.json file and 
         // use it to configure Entity Framework Core
         public Startup(IConfiguration configuration) =>
             Configuration = configuration;
+
+        public IConfiguration Configuration { get; }
 
         public void ConfigureServices(IServiceCollection services)
         {
@@ -33,9 +30,18 @@ namespace OnlineStore
             options.UseSqlServer(
                 Configuration["Data:OnlineStoreIdentity:ConnectionString"]));
 
-            services.AddIdentity<IdentityUser, IdentityRole>()
-            .AddEntityFrameworkStores<AppIdentityDbContext>()
-            .AddDefaultTokenProviders();
+            //services.AddIdentity<IdentityUser, IdentityRole>() //534
+            services.AddIdentity<AppUser, IdentityRole>(opts => {
+                opts.User.RequireUniqueEmail = true;
+                //opts.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyz";
+                opts.Password.RequiredLength = 6;
+                opts.Password.RequireNonAlphanumeric = false;
+                opts.Password.RequireLowercase = false;
+                opts.Password.RequireUppercase = false;
+                opts.Password.RequireDigit = false;
+
+            }).AddEntityFrameworkStores<AppIdentityDbContext>()
+                .AddDefaultTokenProviders();
 
             //for testing purpose only
             //services.AddTransient<IProductRepository, TemporaryProductRepository>();
@@ -137,7 +143,7 @@ namespace OnlineStore
 
             // seed the database when the application starts
             SeedData.EnsurePopulated(app);
-            IdentitySeedData.EnsurePopulated(app); // for admin account
+            //IdentitySeedData.EnsurePopulated(app); // for admin account
         }
     }
 }
