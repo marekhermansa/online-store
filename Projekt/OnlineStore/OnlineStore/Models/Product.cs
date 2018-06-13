@@ -20,5 +20,6 @@ namespace OnlineStore.Models
         [Required(ErrorMessage = "Please specify a category")]
         public string Category { get; set; }
         public string ImageUrl { get; set; }
+        public int Quantity { get; set; }
     }
 }

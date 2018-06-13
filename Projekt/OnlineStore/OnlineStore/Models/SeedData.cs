@@ -27,7 +27,8 @@ namespace OnlineStore.Models
                     Description = "The timeless design makes it easy to place in various room settings and match with other furniture.",
                     Category = "Sofas and armchairs",
                     Price = 225,
-                    ImageUrl = "/images/high-back-armchair.jpg"
+                    ImageUrl = "/images/high-back-armchair.jpg",
+                    Quantity = 50
                 },
                 new Product
                 {
@@ -35,7 +36,8 @@ namespace OnlineStore.Models
                     Description = "Cover is made of velvet which, through a traditional weaving technique, gives the fabric a warm, deep colour and a soft surface with a dense pile and light, reflective shine.",
                     Category = "Sofas and armchairs",
                     Price = 895.90m,
-                    ImageUrl = "/images/2-seat-sofa.jpg"
+                    ImageUrl = "/images/2-seat-sofa.jpg",
+                    Quantity = 30
                 },
                 new Product
                 {
@@ -43,7 +45,8 @@ namespace OnlineStore.Models
                     Description = "The melamine table top is moisture resistant, stain resistant and easy to keep clean.",
                     Category = "Tables",
                     Price = 29.50m,
-                    ImageUrl = "/images/table.jpg"
+                    ImageUrl = "/images/table.jpg",
+                    Quantity = 0
                 },
                 new Product
                 {
@@ -51,7 +54,8 @@ namespace OnlineStore.Models
                     Description = "The smart design means that the table top has no seams when you use the table without extending it.",
                     Category = "Tables",
                     Price = 34.95m,
-                    ImageUrl = "/images/extendable-table.jpg"
+                    ImageUrl = "/images/extendable-table.jpg",
+                    Quantity = 5
                 },
                 new Product
                 {
@@ -59,7 +63,8 @@ namespace OnlineStore.Models
                     Description = "Durable and hard-wearing; meets the requirements on furniture for public use.",
                     Category = "Tables",
                     Price = 65,
-                    ImageUrl = "/images/bar-table.jpg"
+                    ImageUrl = "/images/bar-table.jpg",
+                    Quantity = 10
                 },
                 new Product
                 {
@@ -67,7 +72,8 @@ namespace OnlineStore.Models
                     Description = "You sit comfortably thanks to the high back and seat with polyester wadding.",
                     Category = "Chairs, stools and benches",
                     Price = 70,
-                    ImageUrl = "/images/chair.jpg"
+                    ImageUrl = "/images/chair.jpg",
+                    Quantity = 40
                 },
                 new Product
                 {
@@ -75,7 +81,8 @@ namespace OnlineStore.Models
                     Description = "With footrest for relaxed sitting posture.",
                     Category = "Chairs, stools and benches",
                     Price = 45.50m,
-                    ImageUrl = "/images/bar-stool-with-backrest.jpg"
+                    ImageUrl = "/images/bar-stool-with-backrest.jpg",
+                    Quantity = 400
                 },
                 new Product
                 {
@@ -83,7 +90,8 @@ namespace OnlineStore.Models
                     Description = "Solid beech is a hardwearing natural material.",
                     Category = "Chairs, stools and benches",
                     Price = 20,
-                    ImageUrl = "/images/stool.jpg"
+                    ImageUrl = "/images/stool.jpg",
+                    Quantity = 35
                 },
                 new Product
                 {
@@ -91,7 +99,8 @@ namespace OnlineStore.Models
                     Description = "The chair is easy to store when not in use, since you can stack up to 6 chairs on top of each other.",
                     Category = "Chairs, stools and benches",
                     Price = 55,
-                    ImageUrl = "/images/chair-with-armrests.jpg"
+                    ImageUrl = "/images/chair-with-armrests.jpg",
+                    Quantity = 25
                 }
                 );
 

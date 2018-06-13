@@ -26,6 +26,14 @@
             <span class="badge badge-default badge-primary" style="float:right">
                 @Model.Price.ToString("c")
             </span>
+            <span class="badge badge-
+                    @(Model.Quantity == 0 ? "badge-danger" : "")
+                    @((Model.Quantity > 0 && Model.Quantity <= 10) ? "badge-warning" : "")
+                    @(Model.Quantity > 10 ? "badge-success" : "")
+                    badge-primary" style="float:right">
+                @(Model.Quantity == 0 ? "" : @Model.Quantity.ToString())
+                @(Model.Quantity == 0 ? "not avaible" : "avaible")
+            </span>
         </span>
     </div>
 
