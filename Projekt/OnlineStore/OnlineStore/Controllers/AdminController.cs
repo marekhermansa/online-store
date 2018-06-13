@@ -158,10 +158,12 @@ namespace OnlineStore.Controllers
     //public class AdminController : Controller
     //{
     //    private IProductRepository repository;
+
     //    public AdminController(IProductRepository repo)
     //    {
     //        repository = repo;
     //    }
+
     //    public ViewResult Index() => View(repository.Products);
 
     //    public ViewResult Edit(int productId) =>
@@ -182,7 +184,9 @@ namespace OnlineStore.Controllers
     //            return View(product);
     //        }
     //    }
+
     //    public ViewResult Create() => View("Edit", new Product());
+    
     //    [HttpPost]
     //    public IActionResult Delete(int productId)
     //    {

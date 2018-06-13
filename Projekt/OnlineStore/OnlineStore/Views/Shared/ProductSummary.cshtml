@@ -32,7 +32,7 @@
                     @(Model.Quantity > 10 ? "badge-success" : "")
                     badge-primary" style="float:right">
                 @(Model.Quantity == 0 ? "" : @Model.Quantity.ToString())
-                @(Model.Quantity == 0 ? "not avaible" : "avaible")
+                @(Model.Quantity == 0 ? "not available" : "available")
             </span>
         </span>
     </div>
@@ -53,7 +53,8 @@
            asp-all-route-data="@Model.Name">
            go to details
         </a>*@
-
+    @if (Model.Quantity != 0)
+    {
     <form id="@Model.ProductID" asp-action="AddToCart"
           asp-controller="Cart" method="post">
         <input type="hidden" asp-for="ProductID" />
@@ -64,4 +65,5 @@
             Add to cart
         </button>
     </form>
+    }
 </div>

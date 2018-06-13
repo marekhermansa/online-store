@@ -35,6 +35,8 @@ namespace OnlineStore.Controllers
             {
                 cart.AddItem(product, 1);
             }
+            product.Quantity -= 1;
+            repository.SaveProduct(product);
             return RedirectToAction("Index", new { returnUrl });
         }
         public RedirectToActionResult RemoveFromCart(int productId,
