@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using OnlineStore.Migrations.AppIdentityDb;
 using OnlineStore.Models;
 using System.Threading.Tasks;
 
@@ -10,11 +9,11 @@ namespace OnlineStore.Controllers
     [Authorize]
     public class AccountController : Controller
     {
-        private UserManager<OnlineStore.Models.AppUser> userManager;
-        private SignInManager<OnlineStore.Models.AppUser> signInManager;
+        private UserManager<AppUser> userManager;
+        private SignInManager<AppUser> signInManager;
 
-        public AccountController(UserManager<OnlineStore.Models.AppUser> userMgr,
-        SignInManager<OnlineStore.Models.AppUser> signinMgr)
+        public AccountController(UserManager<AppUser> userMgr,
+        SignInManager<AppUser> signinMgr)
         {
             userManager = userMgr;
             signInManager = signinMgr;
@@ -34,7 +33,7 @@ namespace OnlineStore.Controllers
         {
             if (ModelState.IsValid)
             {
-                OnlineStore.Models.AppUser user = await userManager.FindByEmailAsync(details.Email);
+                AppUser user = await userManager.FindByEmailAsync(details.Email);
                 if (user != null)
                 {
                     await signInManager.SignOutAsync();
