@@ -14,3 +14,9 @@
     <a asp-controller="Account" asp-action="Logout"
        class="btn btn-danger">Logout</a>
 }
+
+@if (User?.Identity?.IsAuthenticated ?? false)
+{
+    <a asp-controller="Home" asp-action="UserProps"
+       class="btn btn-warning">Edit</a>
+}

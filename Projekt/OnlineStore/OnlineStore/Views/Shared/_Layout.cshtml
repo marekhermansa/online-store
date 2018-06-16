@@ -47,13 +47,25 @@
                 @await Component.InvokeAsync("CartSummary")
             </div>
             <div class="col-2">
-                <a class="btn btn-sm btn-primary"
-                   asp-action="OtherAction" asp-controller="Home">my account</a>
+                @if (User?.Identity?.IsAuthenticated ?? false)
+                {
+                    <a asp-controller="Home" asp-action="OtherAction"
+                       class="btn btn-sm btn-primary">My Account</a>
+                }
+                else
+                {
+                    <a asp-controller="Home" asp-action="OtherAction"
+                       class="btn btn-sm btn-primary">Login</a>
+                }
             </div>
-            <div class="col-3">
-                <a class="btn btn-sm btn-primary"
-                   asp-action="Logout" asp-controller="Account">logout</a>
-            </div>
+            @if (User?.Identity?.IsAuthenticated ?? false)
+            { 
+                <div class="col-3">
+                    <a class="btn btn-sm btn-primary"
+                       asp-action="Logout" asp-controller="Account">logout</a>
+                </div>
+             }
+
         </div>
     </div>
     <div class="row m-1 p-1">
