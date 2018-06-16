@@ -11,9 +11,10 @@ using System;
 namespace OnlineStore.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180616132810_UserIdInOrder")]
+    partial class UserIdInOrder
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -57,8 +58,6 @@ namespace OnlineStore.Migrations
                         .IsRequired();
 
                     b.Property<bool>("Shipped");
-
-                    b.Property<int>("UserID");
 
                     b.Property<string>("Zip");
 

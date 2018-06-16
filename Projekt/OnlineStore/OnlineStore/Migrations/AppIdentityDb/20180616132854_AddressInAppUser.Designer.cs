@@ -11,9 +11,10 @@ using System;
 namespace OnlineStore.Migrations.AppIdentityDb
 {
     [DbContext(typeof(AppIdentityDbContext))]
-    partial class AppIdentityDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180616132854_AddressInAppUser")]
+    partial class AddressInAppUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -135,7 +136,7 @@ namespace OnlineStore.Migrations.AppIdentityDb
 
                     b.Property<int>("AccessFailedCount");
 
-                    b.Property<string>("City");
+                    b.Property<int>("City");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
@@ -144,10 +145,6 @@ namespace OnlineStore.Migrations.AppIdentityDb
                         .HasMaxLength(256);
 
                     b.Property<bool>("EmailConfirmed");
-
-                    b.Property<string>("Line1");
-
-                    b.Property<string>("Line2");
 
                     b.Property<bool>("LockoutEnabled");
 
@@ -165,14 +162,14 @@ namespace OnlineStore.Migrations.AppIdentityDb
 
                     b.Property<bool>("PhoneNumberConfirmed");
 
+                    b.Property<int>("Qualifications");
+
                     b.Property<string>("SecurityStamp");
 
                     b.Property<bool>("TwoFactorEnabled");
 
                     b.Property<string>("UserName")
                         .HasMaxLength(256);
-
-                    b.Property<string>("Zip");
 
                     b.HasKey("Id");
 

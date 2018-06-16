@@ -33,6 +33,7 @@ namespace OnlineStore.Models
                     dbEntry.Description = product.Description;
                     dbEntry.Price = product.Price;
                     dbEntry.Category = product.Category;
+                    dbEntry.Quantity = product.Quantity;
                 }
             }
             context.SaveChanges();

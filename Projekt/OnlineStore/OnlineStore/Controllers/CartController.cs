@@ -48,6 +48,8 @@ namespace OnlineStore.Controllers
             {
                 cart.RemoveLine(product);
             }
+            product.Quantity += 1;
+            repository.SaveProduct(product);
             return RedirectToAction("Index", new { returnUrl });
         }
     }

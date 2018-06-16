@@ -5,6 +5,7 @@ using OnlineStore.Models;
 using Microsoft.AspNetCore.Identity;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
+using System;
 
 namespace OnlineStore.Controllers
 {
@@ -32,8 +33,14 @@ namespace OnlineStore.Controllers
                 ["Authenticated"] = HttpContext.User.Identity.IsAuthenticated,
                 ["Auth Type"] = HttpContext.User.Identity.AuthenticationType,
                 ["In Users Role"] = HttpContext.User.IsInRole("Users"),
+                //["City"] = CurrentUser.Result.City,
+                //["Qualification"] = CurrentUser.Result.Qualifications,
+                ["Email"] = CurrentUser.Result.Email,
+                ["Id"] = CurrentUser.Result.Id,
+                ["Line1"] = CurrentUser.Result.Line1,
+                ["Line2"] = CurrentUser.Result.Line2,
                 ["City"] = CurrentUser.Result.City,
-                ["Qualification"] = CurrentUser.Result.Qualifications
+                ["Zip"] = CurrentUser.Result.Zip
             };
 
         [Authorize]
@@ -41,22 +48,42 @@ namespace OnlineStore.Controllers
         {
             return View(await CurrentUser);
         }
+
         [Authorize]
         [HttpPost]
         public async Task<IActionResult> UserProps(
-        [Required]Cities city,
-        [Required]QualificationLevels qualifications)
+            [Required]String city, [Required]String line1,
+            [Required]String line2, [Required]String zip)
         {
             if (ModelState.IsValid)
             {
                 AppUser user = await CurrentUser;
                 user.City = city;
-                user.Qualifications = qualifications;
+                user.Line1 = line1;
+                user.Line2 = line2;
+                user.Zip = zip;
                 await userManager.UpdateAsync(user);
                 return RedirectToAction("Index");
             }
             return View(await CurrentUser);
         }
+
+        //[Authorize]
+        //[HttpPost]
+        //public async Task<IActionResult> UserProps(
+        //    [Required]Cities city,
+        //    [Required]QualificationLevels qualifications)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        AppUser user = await CurrentUser;
+        //        user.City = city;
+        //        user.Qualifications = qualifications;
+        //        await userManager.UpdateAsync(user);
+        //        return RedirectToAction("Index");
+        //    }
+        //    return View(await CurrentUser);
+        //}
 
         private Task<AppUser> CurrentUser =>
             userManager.FindByNameAsync(HttpContext.User.Identity.Name);

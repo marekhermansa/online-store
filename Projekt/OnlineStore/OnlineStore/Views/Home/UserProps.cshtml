@@ -6,19 +6,39 @@
 
 <form asp-action="UserProps" method="post">
     <div class="form-group">
-        <label asp-for="City"></label>
-        <select asp-for="City" class="form-control"
-                asp-items="@new SelectList(Enum.GetNames(typeof(Cities)))">
-            <option disabled selected value="">Select a City</option>
-        </select>
+        <label asp-for="Email"></label>
+        <input asp-for="Email" class="form-control" />
     </div>
     <div class="form-group">
-        <label asp-for="Qualifications"></label>
-        <select asp-for="Qualifications" class="form-control"
-                asp-items="@new SelectList(Enum.GetNames(typeof(QualificationLevels)))">
-            <option disabled selected value="">Select a City</option>
-        </select>
+        <label asp-for="Line1"></label>
+        <input asp-for="Line1" class="form-control" />
     </div>
+    <div class="form-group">
+        <label asp-for="Line2"></label>
+        <input asp-for="Line2" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="City"></label>
+        <input asp-for="City" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Zip"></label>
+        <input asp-for="Zip" class="form-control" />
+    </div>
+    @*<div class="form-group">
+            <label asp-for="City"></label>
+            <select asp-for="City" class="form-control"
+                    asp-items="@new SelectList(Enum.GetNames(typeof(Cities)))">
+                <option disabled selected value="">Select a City</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label asp-for="Qualifications"></label>
+            <select asp-for="Qualifications" class="form-control"
+                    asp-items="@new SelectList(Enum.GetNames(typeof(QualificationLevels)))">
+                <option disabled selected value="">Select a City</option>
+            </select>
+        </div>*@
     <button type="submit" class="btn btn-primary">Submit</button>
     <a asp-action="Index" class="btn btn-secondary">Cancel</a>
 </form>

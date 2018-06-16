@@ -2,6 +2,7 @@
 using OnlineStore.Models;
 using System.Linq;
 using Microsoft.AspNetCore.Authorization;
+using System.Threading.Tasks;
 
 namespace OnlineStore.Controllers
 {
@@ -36,6 +37,9 @@ namespace OnlineStore.Controllers
 
         public ViewResult Checkout() => View(new Order());
 
+        //private Task<AppUser> CurrentUser =>
+        //    userManager.FindByNameAsync(HttpContext.User.Identity.Name);
+
         [HttpPost]
         public IActionResult Checkout(Order order)
         {
@@ -46,6 +50,16 @@ namespace OnlineStore.Controllers
 
             if (ModelState.IsValid)
             {
+                //order.UserID;
+                //order.Line1;
+                //order.Line2;
+                //order.City;
+                //order.Zip;
+
+                //ViewBag.zip = CurrentUser.Result.Zip;
+
+                ViewBag.name = HttpContext.User.Identity.Name.ToString();
+
                 order.Lines = cart.Lines.ToArray();
                 repository.SaveOrder(order);
                 return RedirectToAction(nameof(Completed));
