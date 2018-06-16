@@ -144,6 +144,9 @@ namespace OnlineStore
             // seed the database when the application starts
             SeedData.EnsurePopulated(app);
             //IdentitySeedData.EnsurePopulated(app); // for admin account
+
+            //AppIdentityDbContext.CreateAdminAccount(app.ApplicationServices,
+            //    Configuration).Wait();
         }
     }
 }

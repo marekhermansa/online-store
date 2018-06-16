@@ -51,6 +51,19 @@ namespace OnlineStore.Controllers
             return View(details);
         }
 
+        [Authorize]
+        public async Task<IActionResult> Logout()
+        {
+            await signInManager.SignOutAsync();
+            return RedirectToAction("Index", "Home");
+        }
+
+        [AllowAnonymous]
+        public IActionResult AccessDenied()
+        {
+            return View();
+        }
+
         //private UserManager<IdentityUser> userManager;
         //private SignInManager<IdentityUser> signInManager;
         //public AccountController(UserManager<IdentityUser> userMgr,

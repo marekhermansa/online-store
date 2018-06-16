@@ -1,5 +1,9 @@
 ﻿@model RoleEditModel
 
+@{
+    Layout = "_AdminLayout";
+}
+
 <div class="bg-primary m-1 p-1 text-white"><h4>Edit Role</h4></div>
 
 <div asp-validation-summary="All" class="text-danger"></div>
@@ -7,7 +11,7 @@
 <form asp-action="Edit" method="post">
     <input type="hidden" name="roleName" value="@Model.Role.Name" />
     <input type="hidden" name="roleId" value="@Model.Role.Id" />
-    
+
     <h6 class="bg-info p-1 text-white">Add To @Model.Role.Name</h6>
     <table class="table table-bordered table-sm">
         @if (Model.NonMembers.Count() == 0)
@@ -27,7 +31,7 @@
             }
         }
     </table>
-    
+
     <h6 class="bg-info p-1 text-white">Remove From @Model.Role.Name</h6>
     <table class="table table-bordered table-sm">
         @if (Model.Members.Count() == 0)

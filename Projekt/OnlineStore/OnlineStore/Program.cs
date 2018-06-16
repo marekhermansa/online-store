@@ -21,7 +21,7 @@ namespace OnlineStore
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()
                 .UseDefaultServiceProvider(options => 
-                options.ValidateScopes = false)
+                    options.ValidateScopes = false)
                 .Build();
     }
 }

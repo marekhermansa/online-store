@@ -31,8 +31,8 @@
             <td>@item.Name</td>
             <td class="text-right">@item.Price.ToString("c")</td>
             <td class="text-center">
-                <form asp-action="Delete" method="post">
-                    <a asp-action="Edit" class="btn btn-sm btn-warning"
+                <form asp-action="DeleteProduct" method="post">
+                    <a asp-action="EditProduct" class="btn btn-sm btn-warning"
                        asp-route-productId="@item.ProductID">
                         Edit
                     </a>
@@ -46,5 +46,5 @@
     }
 </table>
 <div class="text-center">
-    <a asp-action="Create" class="btn btn-primary">Add Product</a>
+    <a asp-action="CreateProduct" class="btn btn-primary">Add Product</a>
 </div>

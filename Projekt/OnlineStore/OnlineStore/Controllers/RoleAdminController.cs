@@ -4,9 +4,11 @@ using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 using OnlineStore.Models;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Users.Controllers
 {
+    [Authorize(Roles = "Admins")]
     public class RoleAdminController : Controller
     {
         private RoleManager<IdentityRole> roleManager;

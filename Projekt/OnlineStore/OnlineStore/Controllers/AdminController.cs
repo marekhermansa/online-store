@@ -2,9 +2,12 @@
 using Microsoft.AspNetCore.Mvc;
 using OnlineStore.Models;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using System.Linq;
 
 namespace OnlineStore.Controllers
 {
+    [Authorize(Roles = "Admins")]
     public class AdminController : Controller
     {
         private UserManager<AppUser> userManager;
@@ -15,12 +18,15 @@ namespace OnlineStore.Controllers
         public AdminController(UserManager<AppUser> usrMgr,
             IUserValidator<AppUser> userValid,
             IPasswordValidator<AppUser> passValid,
-            IPasswordHasher<AppUser> passwordHash)
+            IPasswordHasher<AppUser> passwordHash,
+            IProductRepository repo)
         {
             userManager = usrMgr;
             userValidator = userValid;
             passwordValidator = passValid;
             passwordHasher = passwordHash;
+
+            repository = repo;
         }
 
         //public AdminController(UserManager<AppUser> usrMgr)
@@ -60,9 +66,9 @@ namespace OnlineStore.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Delete(string id)
+        public async Task<IActionResult> DeleteUser(string id)
         {
-            AppUser user = await userManager.FindByIdAsync(id);
+            AppUser user = await userManager.FindByIdAsync(id); //err
             if (user != null)
             {
                 IdentityResult result = await userManager.DeleteAsync(user);
@@ -82,7 +88,7 @@ namespace OnlineStore.Controllers
             return View("Users", userManager.Users);
         }
 
-        public async Task<IActionResult> Edit(string id)
+        public async Task<IActionResult> EditUser(string id)
         {
             AppUser user = await userManager.FindByIdAsync(id);
             if (user != null)
@@ -96,7 +102,7 @@ namespace OnlineStore.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(string id, string email, string password)
+        public async Task<IActionResult> EditUser(string id, string email, string password)
         {
             AppUser user = await userManager.FindByIdAsync(id);
             if (user != null)
@@ -152,7 +158,57 @@ namespace OnlineStore.Controllers
                 ModelState.AddModelError("", error.Description);
             }
         }
+
+        //-------------------------------------
+
+        private IProductRepository repository;
+
+        //public AdminController(IProductRepository repo)
+        //{
+        //    repository = repo;
+        //}
+
+        public ViewResult Index() => View(repository.Products);
+
+        public ViewResult EditProduct(int productId) =>
+            View(repository.Products
+                .FirstOrDefault(p => p.ProductID == productId));
+
+        [HttpPost]
+        public IActionResult EditProduct(Product product)
+        {
+            if (ModelState.IsValid)
+            {
+                repository.SaveProduct(product);
+                TempData["message"] = $"{product.Name} has been saved";
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return View(product);
+            }
+        }
+
+        public ViewResult CreateProduct() => View("EditProduct", new Product());
+
+        [HttpPost]
+        public IActionResult DeleteProduct(int productId)
+        {
+            Product deletedProduct = repository.DeleteProduct(productId);
+
+            if (deletedProduct != null)
+            {
+                TempData["message"] = $"{deletedProduct.Name} was deleted";
+            }
+
+            return RedirectToAction("Index");
+        }
     }
+
+}
+
+
+
 
     //[Authorize]
     //public class AdminController : Controller
@@ -186,7 +242,7 @@ namespace OnlineStore.Controllers
     //    }
 
     //    public ViewResult Create() => View("Edit", new Product());
-    
+
     //    [HttpPost]
     //    public IActionResult Delete(int productId)
     //    {
@@ -198,4 +254,3 @@ namespace OnlineStore.Controllers
     //        return RedirectToAction("Index");
     //    }
     //}
-}
