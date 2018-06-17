@@ -21,10 +21,59 @@ namespace OnlineStore.Controllers
         [Authorize]
         public IActionResult Index() => View(GetData(nameof(Index)));
 
+        //[Authorize]
+        //public async Task<IActionResult> Index(string id)
+        //{
+        //    AppUser user = await userManager.FindByIdAsync(id);
+        //    if (user != null)
+        //    {
+        //        return View(GetCustomData(nameof(Index)));
+        //    }
+        //    else
+        //    {
+        //        return RedirectToAction("Users", "Admin");
+        //    }
+        //}
+
         //[Authorize(Roles = "Users")]
         [Authorize]
         public IActionResult OtherAction() => View("Index",
         GetData(nameof(OtherAction)));
+
+        [Authorize]
+        public async Task<IActionResult> OtherActionCustom(string id)
+        {
+            AppUser user = await userManager.FindByIdAsync(id);
+            if (user != null)
+            {
+                return View("Index", GetCustomData(user, id, nameof(OtherActionCustom)));
+            }
+            else
+            {
+                return RedirectToAction("Users", "Admin");
+            }
+        }
+
+        private Dictionary<string, object> GetCustomData(AppUser user, string id, string actionName) =>
+            new Dictionary<string, object>
+            {
+                ["Action"] = actionName,
+                ["Id"] = user.Id,
+                ["User"] = user.UserName,
+                ["Email"] = user.Email,
+
+                ["Line1"] = user.Line1,
+                ["Line2"] = user.Line2,
+                ["City"] = user.City,
+                ["Zip"] = user.Zip,
+
+                ["CreditCardOwner"] = user.CreditCardOwner,
+                ["CreditCardNumber"] = user.CreditCardNumber,
+                ["ExpirationDate"] = user.ExpirationDate
+
+                //["City"] = CurrentUser.Result.City,
+                //["Qualification"] = CurrentUser.Result.Qualifications,
+            };
 
         private Dictionary<string, object> GetData(string actionName) =>
             new Dictionary<string, object>

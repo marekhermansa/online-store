@@ -1,7 +1,7 @@
 ﻿@model Dictionary<string, object>
 
 
-@if (Model["In Users Role"].ToString() == "False")
+@if (Model["Action"].ToString() == "OtherActionCustom")
 {
     Layout = "_AdminLayout";
 }
@@ -13,7 +13,7 @@
     {
         @if (kvp.Key == "Action")
         {
-            <tr><th colspan="2" align"center"><h3>System</h3></th></tr>
+            <tr><th colspan="2" align"center"><h3>General</h3></th></tr>
         }
         @if (kvp.Key == "Line1")
         {
@@ -28,7 +28,7 @@
     }
 </table>
 
-@if (Model["In Users Role"].ToString() == "True")
+@if (Model["Action"].ToString() == "OtherAction")
 {
 
     @if (User?.Identity?.IsAuthenticated ?? false)
