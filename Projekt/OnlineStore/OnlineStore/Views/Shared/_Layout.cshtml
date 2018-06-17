@@ -1,35 +1,5 @@
 ﻿<!DOCTYPE html>
 
-@*<html>
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width" />
-        <link href="/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
-        <title>OnlineStore</title>
-    </head>
-    <body>
-        <div>
-            <div>
-                <img src="~/images/logo1.jpg" alt="logo" title="logo" height="72" width="290" />
-                <hr>
-                <div>
-                    @await Component.InvokeAsync("CartSummary")
-                </div>
-            </div>
-        </div>
-        <div>
-            <hr>
-            <div>
-                @await Component.InvokeAsync("NavigationMenu")
-            </div>
-            <hr>
-            <div>
-                @RenderBody()
-            </div>
-        </div>
-    </body>
-    </html>*@
-
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
@@ -76,3 +46,33 @@
     </div>
 </body>
 </html>
+
+@*<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width" />
+        <link href="/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+        <title>OnlineStore</title>
+    </head>
+    <body>
+        <div>
+            <div>
+                <img src="~/images/logo1.jpg" alt="logo" title="logo" height="72" width="290" />
+                <hr>
+                <div>
+                    @await Component.InvokeAsync("CartSummary")
+                </div>
+            </div>
+        </div>
+        <div>
+            <hr>
+            <div>
+                @await Component.InvokeAsync("NavigationMenu")
+            </div>
+            <hr>
+            <div>
+                @RenderBody()
+            </div>
+        </div>
+    </body>
+    </html>*@

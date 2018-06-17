@@ -1,10 +1,11 @@
 ﻿@model IEnumerable<OnlineStore.Models.AppUser>
 
 @{
+    ViewBag.Title = "Users";
     Layout = "_AdminLayout";
 }
 
-<div class="bg-primary m-1 p-1 text-white"><h4>User Accounts</h4></div>
+@*<div class="bg-primary m-1 p-1 text-white"><h4>User Accounts</h4></div>*@
 
 <div class="text-danger" asp-validation-summary="ModelOnly"></div>
 
@@ -31,10 +32,15 @@
                             Delete
                         </button>
                     </form>
+                    <a asp-controller="Home" asp-action="OtherAction"
+                       asp-route-id="@user.Id"
+                       class="btn btn-sm btn-primary">Details</a>
                 </td>
             </tr>
         }
     }
 </table>
+<div class="text-center">
+    <a class="btn btn-primary" asp-action="Create">Create</a>
+</div>
 
-<a class="btn btn-primary" asp-action="Create">Create</a>

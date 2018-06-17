@@ -29,6 +29,7 @@ namespace OnlineStore.Controllers
         private Dictionary<string, object> GetData(string actionName) =>
             new Dictionary<string, object>
             {
+
                 ["Action"] = actionName,
                 ["Id"] = CurrentUser.Result.Id,
                 ["Authenticated"] = HttpContext.User.Identity.IsAuthenticated,
@@ -78,6 +79,8 @@ namespace OnlineStore.Controllers
                 user.CreditCardNumber = creditCardNumber;
                 user.ExpirationDate = expirationDate;
                 await userManager.UpdateAsync(user);
+
+
                 return RedirectToAction("Index");
             }
             return View(await CurrentUser);

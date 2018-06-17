@@ -47,7 +47,6 @@ namespace OnlineStore.Controllers
                     {
                         if (await userManager.IsInRoleAsync(user, "Admins"))
                         {
-
                             return RedirectToAction("Index", "Admin");
                         }
                         else //if(role == null)
