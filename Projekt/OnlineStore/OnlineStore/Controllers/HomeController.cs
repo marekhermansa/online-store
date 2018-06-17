@@ -21,7 +21,8 @@ namespace OnlineStore.Controllers
         [Authorize]
         public IActionResult Index() => View(GetData(nameof(Index)));
 
-        [Authorize(Roles = "Users")]
+        //[Authorize(Roles = "Users")]
+        [Authorize]
         public IActionResult OtherAction() => View("Index",
         GetData(nameof(OtherAction)));
 

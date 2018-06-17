@@ -14,6 +14,8 @@
 
 @model OnlineStore.Models.Product
 
+@*<br><img src="~/images/bar-stool-with-backrest.jpg" alt="test" title="test" height="100" width="100" />
+<br><img src="~/images/logo.jpg" alt="test" title="test" height="100" width="100" />*@
 
 <div class="card card-outline-primary m-1 p-1">
     <div class="bg-faded p-1">
@@ -55,15 +57,15 @@
         </a>*@
     @if (Model.Quantity != 0)
     {
-    <form id="@Model.ProductID" asp-action="AddToCart"
-          asp-controller="Cart" method="post">
-        <input type="hidden" asp-for="ProductID" />
-        <input type="hidden" name="returnUrl"
-               value="@OnlineStore.Infrastructure.UrlExtensions.PathAndQuery(ViewContext.HttpContext.Request)" />
-        <button type="submit"
-                class="btn btn-success btn-sm pull-right" style="float:right">
-            Add to cart
-        </button>
-    </form>
+        <form id="@Model.ProductID" asp-action="AddToCart"
+              asp-controller="Cart" method="post">
+            <input type="hidden" asp-for="ProductID" />
+            <input type="hidden" name="returnUrl"
+                   value="@OnlineStore.Infrastructure.UrlExtensions.PathAndQuery(ViewContext.HttpContext.Request)" />
+            <button type="submit"
+                    class="btn btn-success btn-sm pull-right" style="float:right">
+                Add to cart
+            </button>
+        </form>
     }
 </div>

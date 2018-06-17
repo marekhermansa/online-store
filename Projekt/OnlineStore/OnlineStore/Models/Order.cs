@@ -25,5 +25,8 @@ namespace OnlineStore.Models
         [Required(ErrorMessage = "Enter a city name")]
         public string City { get; set; }
         public string Zip { get; set; }
+        public string CreditCardOwner { get; set; }
+        public string CreditCardNumber { get; set; }
+        public string ExpirationDate { get; set; }
     }
 }

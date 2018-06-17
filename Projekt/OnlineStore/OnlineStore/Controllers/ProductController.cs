@@ -103,13 +103,17 @@ namespace OnlineStore.Controllers
         public ViewResult ProductPage(int productId, string returnUrl)
         {
             Product product = repository.Products
-            .FirstOrDefault(p => p.ProductID == productId);
+                .FirstOrDefault(p => p.ProductID == productId);
 
-            return View(new ProductIndexViewModel
-            {
-                Product = product,
-                ReturnUrl = returnUrl
-            });
+            ViewBag.ReturnUrl = returnUrl;
+
+            return View(product);
+
+            //return View(new ProductIndexViewModel
+            //{
+            //    Product = product,
+            //    ReturnUrl = returnUrl
+            //});
         }
 
         //public ViewResult Details(string productName)

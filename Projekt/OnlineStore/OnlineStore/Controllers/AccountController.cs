@@ -11,12 +11,15 @@ namespace OnlineStore.Controllers
     {
         private UserManager<AppUser> userManager;
         private SignInManager<AppUser> signInManager;
+        private RoleManager<IdentityRole> roleManager;
 
         public AccountController(UserManager<AppUser> userMgr,
-        SignInManager<AppUser> signinMgr)
+        SignInManager<AppUser> signinMgr,
+        RoleManager<IdentityRole> roleMgr)
         {
             userManager = userMgr;
             signInManager = signinMgr;
+            roleManager = roleMgr;
         }
 
         [AllowAnonymous]
@@ -42,7 +45,17 @@ namespace OnlineStore.Controllers
                     user, details.Password, false, false);
                     if (result.Succeeded)
                     {
-                        return Redirect(returnUrl ?? "/");
+                        //if (HttpContext.User.IsInRole("Users"))
+                        //if(HttpContext.User.IsInRole("Users"))
+                        IdentityRole role = await roleManager.FindByIdAsync(user.Id);
+                        if (role.Name == "Admins")
+                        {
+                            return RedirectToAction("Index", "Admin");
+                        }
+                        else //if(role == null)
+                        {
+                            return Redirect(returnUrl ?? "/");
+                        }
                     }
                 }
                 ModelState.AddModelError(nameof(LoginModel.Email),

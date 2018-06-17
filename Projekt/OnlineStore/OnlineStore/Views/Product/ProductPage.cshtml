@@ -11,46 +11,51 @@
 
 @*<link rel="stylesheet" asp-href-include="css/style.css" />*@
 
-@model OnlineStore.Models.ViewModels.ProductIndexViewModel
+@model OnlineStore.Models.Product
 
-<h2>@Model.Product.Name</h2>
+@*@model OnlineStore.Models.ViewModels.ProductIndexViewModel*@
 
-<br><img src="@Model.Product.ImageUrl" alt="@Model.Product.Name" title="@Model.Product.Name" height="192" width="192" />
-<br>@Model.Product.Description
-<h2><span class="badge badge-default badge-primary" style="float:right">
-        @Model.Product.Price.ToString("c")
+<h2>@Model.Name</h2>
+
+<br><img src="@Model.ImageUrl" alt="@Model.Name" title="@Model.Name" height="192" width="192" />
+<br>@Model.Description
+<h2>
+    <span class="badge badge-default badge-primary" style="float:right">
+        @Model.Price.ToString("c")
     </span>
     <span class="badge badge-
-                    @(Model.Product.Quantity == 0 ? "badge-danger" : "")
-                    @((Model.Product.Quantity > 0 && Model.Product.Quantity <= 10) ? "badge-warning" : "")
-                    @(Model.Product.Quantity > 10 ? "badge-success" : "")
+                    @(Model.Quantity == 0 ? "badge-danger" : "")
+                    @((Model.Quantity > 0 && Model.Quantity <= 10) ? "badge-warning" : "")
+                    @(Model.Quantity > 10 ? "badge-success" : "")
                     badge-primary" style="float:right">
-        @(Model.Product.Quantity == 0 ? "" : @Model.Product.Quantity.ToString())
-        @(Model.Product.Quantity == 0 ? "not available" : "available")
+        @(Model.Quantity == 0 ? "" : @Model.Quantity.ToString())
+        @(Model.Quantity == 0 ? "not available" : "available")
     </span>
-    </h2>
-    @*<form id="@Model.Product.ProductID" asp-action="AddToCart"
-              asp-controller="Cart" method="post">
-            <input type="hidden" asp-for="@Model.Product.ProductID" />
-            <input type="hidden" name="returnUrl"
-                   value="@Model.ReturnUrl" />
-            <button type="submit">
-                Add to cart
-            </button>
-        </form>*@
+</h2>
+@*<form id="@Model.Product.ProductID" asp-action="AddToCart"
+          asp-controller="Cart" method="post">
+        <input type="hidden" asp-for="@Model.Product.ProductID" />
+        <input type="hidden" name="returnUrl"
+               value="@Model.ReturnUrl" />
+        <button type="submit">
+            Add to cart
+        </button>
+    </form>*@
 
-    @if (Model.Product.Quantity != 0)
-    {
-        <form id="@Model.Product.ProductID" asp-action="AddToCart"
-              asp-controller="Cart" method="post">
-            <input type="hidden" asp-for="Product.ProductID" />
-            <input type="hidden" name="returnUrl"
-                   value="@OnlineStore.Infrastructure.UrlExtensions.PathAndQuery(ViewContext.HttpContext.Request)" />
-            <button type="submit"
-                    class="btn btn-success btn-sm pull-right" style="float:right">
-                Add to cart
-            </button>
-        </form>
-    }
+@if (Model.Quantity != 0)
+{
+<form id="@Model.ProductID" asp-action="AddToCart"
+      asp-controller="Cart" method="post">
+    <input type="hidden" asp-for="ProductID" />
+    @*<input type="hidden" name="returnUrl"
+        value="@OnlineStore.Infrastructure.UrlExtensions.PathAndQuery(ViewContext.HttpContext.Request)" />*@
+    <input type="hidden" name="returnUrl"
+           value=@ViewBag.ReturnUrl />
+    <button type="submit"
+            class="btn btn-success btn-sm pull-right" style="float:right">
+        Add to cart
+    </button>
+</form>
+}
 
-    <br><a href="@Model.ReturnUrl">Continue shopping</a>
+@*<br><a href="@Model.ReturnUrl">Continue shopping</a>*@
