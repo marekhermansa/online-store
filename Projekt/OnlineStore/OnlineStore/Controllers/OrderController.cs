@@ -23,6 +23,9 @@ namespace OnlineStore.Controllers
         public ViewResult List() =>
             View(repository.Orders.Where(o => !o.Shipped));
 
+        public ViewResult UserOrders() =>
+            View(repository.Orders.Where(o => o.UserID == CurrentUser.Result.Id));
+
         [HttpPost]
         [Authorize]
         public IActionResult MarkShipped(int orderID)

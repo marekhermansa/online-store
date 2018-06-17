@@ -57,6 +57,7 @@
                 {
                     <a asp-controller="Home" asp-action="OtherAction"
                        class="btn btn-sm btn-primary">My Account</a>
+
                 }
                 else
                 {
@@ -72,6 +73,14 @@
                 </div>
             }
 
+
+            @if (User?.Identity?.IsAuthenticated ?? false)
+            {
+                <div class="row">
+                    <a class="btn btn-sm btn-primary"
+                       asp-action="UserOrders" asp-controller="Order">My Orders</a>
+                </div>
+            }
         </div>
     </div>
     <div class="row m-1 p-1">
