@@ -29,18 +29,24 @@ namespace OnlineStore.Controllers
             new Dictionary<string, object>
             {
                 ["Action"] = actionName,
-                ["User"] = HttpContext.User.Identity.Name,
+                ["Id"] = CurrentUser.Result.Id,
                 ["Authenticated"] = HttpContext.User.Identity.IsAuthenticated,
                 ["Auth Type"] = HttpContext.User.Identity.AuthenticationType,
                 ["In Users Role"] = HttpContext.User.IsInRole("Users"),
-                //["City"] = CurrentUser.Result.City,
-                //["Qualification"] = CurrentUser.Result.Qualifications,
+                ["User"] = HttpContext.User.Identity.Name,
                 ["Email"] = CurrentUser.Result.Email,
-                ["Id"] = CurrentUser.Result.Id,
+
                 ["Line1"] = CurrentUser.Result.Line1,
                 ["Line2"] = CurrentUser.Result.Line2,
                 ["City"] = CurrentUser.Result.City,
-                ["Zip"] = CurrentUser.Result.Zip
+                ["Zip"] = CurrentUser.Result.Zip,
+
+                ["CreditCardOwner"] = CurrentUser.Result.CreditCardOwner,
+                ["CreditCardNumber"] = CurrentUser.Result.CreditCardNumber,
+                ["ExpirationDate"] = CurrentUser.Result.ExpirationDate
+
+                //["City"] = CurrentUser.Result.City,
+                //["Qualification"] = CurrentUser.Result.Qualifications,
             };
 
         [Authorize]
@@ -52,8 +58,13 @@ namespace OnlineStore.Controllers
         [Authorize]
         [HttpPost]
         public async Task<IActionResult> UserProps(
-            [Required]String city, [Required]String line1,
-            [Required]String line2, [Required]String zip)
+            [Required]String city, 
+            [Required]String line1,
+            [Required]String line2, 
+            [Required]String zip,
+            [Required]String creditCardOwner,
+            [Required]String creditCardNumber,
+            [Required]String expirationDate)
         {
             if (ModelState.IsValid)
             {
@@ -62,6 +73,9 @@ namespace OnlineStore.Controllers
                 user.Line1 = line1;
                 user.Line2 = line2;
                 user.Zip = zip;
+                user.CreditCardOwner = creditCardOwner;
+                user.CreditCardNumber = creditCardNumber;
+                user.ExpirationDate = expirationDate;
                 await userManager.UpdateAsync(user);
                 return RedirectToAction("Index");
             }

@@ -47,7 +47,7 @@
                 @await Component.InvokeAsync("CartSummary")
                 @if (User?.Identity?.IsAuthenticated ?? false)
                 {
-                    <span class="badge-info">Hi, @User?.Identity.Name </span>
+                    <span class="badge-info">You're logged in as @User?.Identity.Name </span>
                 }
                 @if (User?.Identity?.IsAuthenticated ?? false)
                 {

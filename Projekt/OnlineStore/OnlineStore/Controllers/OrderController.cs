@@ -42,13 +42,18 @@ namespace OnlineStore.Controllers
 
         public ViewResult Checkout()
         {
-            //ViewBag.Test = "testa";
+            //user
             ViewBag.UserID = CurrentUser.Result.Id;
             ViewBag.Name = CurrentUser.Result.UserName;
+            //address
             ViewBag.Line1 = CurrentUser.Result.Line1;
             ViewBag.Line2 = CurrentUser.Result.Line2;
             ViewBag.City = CurrentUser.Result.City;
             ViewBag.Zip = CurrentUser.Result.Zip;
+            //creditcard
+            ViewBag.CreditCardOwner = CurrentUser.Result.CreditCardOwner;
+            ViewBag.CreditCardNumber = CurrentUser.Result.CreditCardNumber;
+            ViewBag.ExpirationDate = CurrentUser.Result.ExpirationDate;
 
             return View(new Order());
         }
@@ -69,11 +74,11 @@ namespace OnlineStore.Controllers
 
             if (ModelState.IsValid)
             {
-                order.UserID = CurrentUser.Result.Id;
-                order.Line1 = CurrentUser.Result.Line1; 
-                order.Line2 = CurrentUser.Result.Line2;
-                order.City = CurrentUser.Result.City;
-                order.Zip = CurrentUser.Result.Zip;
+                //order.UserID = CurrentUser.Result.Id;
+                //order.Line1 = CurrentUser.Result.Line1; 
+                //order.Line2 = CurrentUser.Result.Line2;
+                //order.City = CurrentUser.Result.City;
+                //order.Zip = CurrentUser.Result.Zip;
 
                 order.Lines = cart.Lines.ToArray();
                 repository.SaveOrder(order);

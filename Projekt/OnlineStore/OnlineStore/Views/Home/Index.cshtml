@@ -5,6 +5,19 @@
 <table class="table table-sm table-bordered m-1 p-1">
     @foreach (var kvp in Model)
     {
+        @if (kvp.Key == "Action")
+        {
+            <tr><th colspan="2" align"center"><h3>System</h3></th></tr>
+        }
+        @if (kvp.Key == "Line1")
+        {
+            <tr><th colspan="2" align="center"><h3>Address</h3></th></tr>
+        }
+        @if (kvp.Key == "CreditCardOwner")
+        {
+            <tr><th colspan="2" align="center"><h3>Credit Card</h3></th></tr>
+        }
+
         <tr><th>@kvp.Key</th><td>@kvp.Value</td></tr>
     }
 </table>
