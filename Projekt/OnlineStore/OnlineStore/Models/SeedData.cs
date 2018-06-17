@@ -28,6 +28,8 @@ namespace OnlineStore.Models
                     Category = "Sofas and armchairs",
                     Price = 225,
                     ImageUrl = "/images/high-back-armchair.jpg",
+                    ImageUrl1 = "/images/high-back-armchair-1.jpg",
+                    ImageUrl2 = "/images/high-back-armchair-2.jpg",
                     Quantity = 50
                 },
                 new Product
@@ -37,6 +39,8 @@ namespace OnlineStore.Models
                     Category = "Sofas and armchairs",
                     Price = 895.90m,
                     ImageUrl = "/images/2-seat-sofa.jpg",
+                    ImageUrl1 = "/images/2-seat-sofa-1.jpg",
+                    ImageUrl2 = "/images/2-seat-sofa-2.jpg",
                     Quantity = 30
                 },
                 new Product
@@ -46,6 +50,8 @@ namespace OnlineStore.Models
                     Category = "Tables",
                     Price = 29.50m,
                     ImageUrl = "/images/table.jpg",
+                    ImageUrl1 = "/images/table-1.jpg",
+                    ImageUrl2 = "/images/table-2.jpg",
                     Quantity = 0
                 },
                 new Product
@@ -55,6 +61,8 @@ namespace OnlineStore.Models
                     Category = "Tables",
                     Price = 34.95m,
                     ImageUrl = "/images/extendable-table.jpg",
+                    ImageUrl1 = "/images/extendable-table-1.jpg",
+                    ImageUrl2 = "/images/extendable-table-2.jpg",
                     Quantity = 5
                 },
                 new Product
@@ -64,6 +72,8 @@ namespace OnlineStore.Models
                     Category = "Tables",
                     Price = 65,
                     ImageUrl = "/images/bar-table.jpg",
+                    ImageUrl1 = "/images/bar-table-1.jpg",
+                    ImageUrl2 = "/images/bar-table-2.jpg",
                     Quantity = 10
                 },
                 new Product
@@ -73,6 +83,8 @@ namespace OnlineStore.Models
                     Category = "Chairs, stools and benches",
                     Price = 70,
                     ImageUrl = "/images/chair.jpg",
+                    ImageUrl1 = "/images/chair1.jpg",
+                    ImageUrl2 = "/images/chair2.jpg",
                     Quantity = 40
                 },
                 new Product
@@ -82,6 +94,8 @@ namespace OnlineStore.Models
                     Category = "Chairs, stools and benches",
                     Price = 45.50m,
                     ImageUrl = "/images/bar-stool-with-backrest.jpg",
+                    ImageUrl1 = "/images/bar-stool-with-backrest-1.jpg",
+                    ImageUrl2 = "/images/bar-stool-with-backrest-2.jpg",
                     Quantity = 400
                 },
                 new Product
@@ -91,6 +105,8 @@ namespace OnlineStore.Models
                     Category = "Chairs, stools and benches",
                     Price = 20,
                     ImageUrl = "/images/stool.jpg",
+                    ImageUrl1 = "/images/stool-1.jpg",
+                    ImageUrl2 = "/images/stool-2.jpg",
                     Quantity = 35
                 },
                 new Product
@@ -100,6 +116,8 @@ namespace OnlineStore.Models
                     Category = "Chairs, stools and benches",
                     Price = 55,
                     ImageUrl = "/images/chair-with-armrests.jpg",
+                    ImageUrl1 = "/images/chair-with-armrests-1.jpg",
+                    ImageUrl2 = "/images/chair-with-armrests-2.jpg",
                     Quantity = 25
                 }
                 );
