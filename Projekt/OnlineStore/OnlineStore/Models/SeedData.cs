@@ -83,8 +83,8 @@ namespace OnlineStore.Models
                     Category = "Chairs, stools and benches",
                     Price = 70,
                     ImageUrl = "/images/chair.jpg",
-                    ImageUrl1 = "/images/chair1.jpg",
-                    ImageUrl2 = "/images/chair2.jpg",
+                    ImageUrl1 = "/images/chair-1.jpg",
+                    ImageUrl2 = "/images/chair-2.jpg",
                     Quantity = 40
                 },
                 new Product
