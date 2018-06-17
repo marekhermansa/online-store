@@ -29,6 +29,11 @@
         <input asp-for="Price" class="form-control" />
     </div>
     <div class="form-group">
+        <label asp-for="ImageUrl"></label>
+        <div><span asp-validation-for="ImageUrl" class="text-danger"></span></div>
+        <input asp-for="ImageUrl" class="form-control" />
+    </div>
+    <div class="form-group">
         <label asp-for="Quantity"></label>
         <div><span asp-validation-for="Quantity" class="text-danger"></span></div>
         <input asp-for="Quantity" class="form-control" />

@@ -154,5 +154,35 @@ namespace OnlineStore.Controllers
 
         private Task<AppUser> CurrentUser =>
             userManager.FindByNameAsync(HttpContext.User.Identity.Name);
+
+
+        public ViewResult Create() => View();
+
+        [HttpPost]
+        public async Task<IActionResult> Create(CreateModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                AppUser user = new AppUser
+                {
+                    UserName = model.Name,
+                    Email = model.Email
+                };
+                IdentityResult result
+                = await userManager.CreateAsync(user, model.Password);
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("OtherAction", "Home");
+                }
+                else
+                {
+                    foreach (IdentityError error in result.Errors)
+                    {
+                        ModelState.AddModelError("", error.Description);
+                    }
+                }
+            }
+            return View(model);
+        }
     }
 }
