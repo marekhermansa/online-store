@@ -43,21 +43,20 @@
     <div class="navbar navbar-inverse bg-inverse" role="navigation">
         <div class="row">
             <img src="~/images/logo1.jpg" alt="logo" title="logo" height="72" width="290" />
-            <div class="col-lg text-right">
+            <div class="col text-right">
                 @await Component.InvokeAsync("CartSummary")
-            </div>
-            <div class="badge-default">
                 @if (User?.Identity?.IsAuthenticated ?? false)
                 {
-                    @User?.Identity.Name
+                    <span class="badge-info">Hi, @User?.Identity.Name </span>
                 }
-            </div>
-            <div class="col-2">
                 @if (User?.Identity?.IsAuthenticated ?? false)
                 {
                     <a asp-controller="Home" asp-action="OtherAction"
                        class="btn btn-sm btn-primary">My Account</a>
-
+                    <a class="btn btn-sm btn-primary"
+                       asp-action="UserOrders" asp-controller="Order">My Orders</a>
+                    <a class="btn btn-sm btn-primary"
+                       asp-action="Logout" asp-controller="Account">logout</a>
                 }
                 else
                 {
@@ -65,22 +64,6 @@
                        class="btn btn-sm btn-primary">Login</a>
                 }
             </div>
-            @if (User?.Identity?.IsAuthenticated ?? false)
-            {
-                <div class="col-3">
-                    <a class="btn btn-sm btn-primary"
-                       asp-action="Logout" asp-controller="Account">logout</a>
-                </div>
-            }
-
-
-            @if (User?.Identity?.IsAuthenticated ?? false)
-            {
-                <div class="row">
-                    <a class="btn btn-sm btn-primary"
-                       asp-action="UserOrders" asp-controller="Order">My Orders</a>
-                </div>
-            }
         </div>
     </div>
     <div class="row m-1 p-1">
