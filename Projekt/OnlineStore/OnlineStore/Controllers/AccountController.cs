@@ -45,11 +45,9 @@ namespace OnlineStore.Controllers
                     user, details.Password, false, false);
                     if (result.Succeeded)
                     {
-                        //if (HttpContext.User.IsInRole("Users"))
-                        //if(HttpContext.User.IsInRole("Users"))
-                        IdentityRole role = await roleManager.FindByIdAsync(user.Id);
-                        if (role.Name == "Admins")
+                        if (await userManager.IsInRoleAsync(user, "Admins"))
                         {
+
                             return RedirectToAction("Index", "Admin");
                         }
                         else //if(role == null)
@@ -58,6 +56,7 @@ namespace OnlineStore.Controllers
                         }
                     }
                 }
+
                 ModelState.AddModelError(nameof(LoginModel.Email),
                 "Invalid user or password");
             }
