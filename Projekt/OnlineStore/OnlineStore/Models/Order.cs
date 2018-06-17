@@ -12,7 +12,7 @@ namespace OnlineStore.Models
         [BindNever]
         public int OrderID { get; set; }
         [BindNever]
-        public int UserID { get; set; }
+        public String UserID { get; set; }
         [BindNever]
         public ICollection<CartLine> Lines { get; set; }
         [BindNever]

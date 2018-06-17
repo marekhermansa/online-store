@@ -3,6 +3,7 @@ using OnlineStore.Models;
 using System.Linq;
 using Microsoft.AspNetCore.Authorization;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 
 namespace OnlineStore.Controllers
 {
@@ -11,10 +12,11 @@ namespace OnlineStore.Controllers
         private IOrderRepository repository;
         private Cart cart;
 
-        public OrderController(IOrderRepository repoService, Cart cartService)
+        public OrderController(IOrderRepository repoService, Cart cartService, UserManager<AppUser> userMgr)
         {
             repository = repoService;
             cart = cartService;
+            userManager = userMgr;
         }
 
         [Authorize]
@@ -35,10 +37,24 @@ namespace OnlineStore.Controllers
             return RedirectToAction(nameof(List));
         }
 
-        public ViewResult Checkout() => View(new Order());
+        public ViewResult Checkout()
+        {
+            //ViewBag.Test = "testa";
+            ViewBag.UserID = CurrentUser.Result.Id;
+            ViewBag.Name = CurrentUser.Result.UserName;
+            ViewBag.Line1 = CurrentUser.Result.Line1;
+            ViewBag.Line2 = CurrentUser.Result.Line2;
+            ViewBag.City = CurrentUser.Result.City;
+            ViewBag.Zip = CurrentUser.Result.Zip;
 
-        //private Task<AppUser> CurrentUser =>
-        //    userManager.FindByNameAsync(HttpContext.User.Identity.Name);
+            return View(new Order());
+        }
+
+
+        private UserManager<AppUser> userManager;
+
+        private Task<AppUser> CurrentUser =>
+            userManager.FindByNameAsync(HttpContext.User.Identity.Name);
 
         [HttpPost]
         public IActionResult Checkout(Order order)
@@ -50,15 +66,11 @@ namespace OnlineStore.Controllers
 
             if (ModelState.IsValid)
             {
-                //order.UserID;
-                //order.Line1;
-                //order.Line2;
-                //order.City;
-                //order.Zip;
-
-                //ViewBag.zip = CurrentUser.Result.Zip;
-
-                ViewBag.name = HttpContext.User.Identity.Name.ToString();
+                order.UserID = CurrentUser.Result.Id;
+                order.Line1 = CurrentUser.Result.Line1; 
+                order.Line2 = CurrentUser.Result.Line2;
+                order.City = CurrentUser.Result.City;
+                order.Zip = CurrentUser.Result.Zip;
 
                 order.Lines = cart.Lines.ToArray();
                 repository.SaveOrder(order);

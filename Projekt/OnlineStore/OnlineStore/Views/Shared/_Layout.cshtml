@@ -46,6 +46,12 @@
             <div class="col-lg text-right">
                 @await Component.InvokeAsync("CartSummary")
             </div>
+            <div class="badge-default">
+                @if (User?.Identity?.IsAuthenticated ?? false)
+                {
+                    @User?.Identity.Name
+                }
+            </div>
             <div class="col-2">
                 @if (User?.Identity?.IsAuthenticated ?? false)
                 {
@@ -59,12 +65,12 @@
                 }
             </div>
             @if (User?.Identity?.IsAuthenticated ?? false)
-            { 
+            {
                 <div class="col-3">
                     <a class="btn btn-sm btn-primary"
                        asp-action="Logout" asp-controller="Account">logout</a>
                 </div>
-             }
+            }
 
         </div>
     </div>

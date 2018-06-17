@@ -2,7 +2,9 @@
 @*<link rel="stylesheet" asp-href-include="css/style.css" />*@
 <link href="/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
 
-<h3>@ViewBag.name</h3>
+@{Model.UserID = ViewBag.UserID;}
+
+@Model.UserID
 <h2>Check out</h2>
 <p>Enter shipping details</p>
 <div asp-validation-summary="All" class="text-danger"></div>
@@ -10,25 +12,21 @@
 <form asp-action="Checkout" method="post">
     <h3>Deliver to</h3>
     <div class="form-group">
-        <label>Name:</label>
-        <input asp-for="Name"
-               class="form-control" />
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control" value=@ViewBag.Name />
     </div>
     <h3>Address</h3>
     <div class="form-group">
-        <label>Line 1:</label>
-        <input asp-for="Line1"
-               class="form-control" />
+        <label asp-for="Line1"></label>
+        <input asp-for="Line1" class="form-control" value=@ViewBag.Line1 />
     </div>
     <div class="form-group">
-        <label>Line 2:</label>
-        <input asp-for="Line2"
-               class="form-control" />
+        <label asp-for="Line2"></label>
+        <input asp-for="Line2" class="form-control" value=@ViewBag.Line2 />
     </div>
     <div class="form-group">
-        <label>City:</label>
-        <input asp-for="City"
-               class="form-control" />
+        <label asp-for="City"></label>
+        <input asp-for="City" class="form-control" value=@ViewBag.City />
     </div>
     @*<div class="form-group">
             <label>Zip:</label>
@@ -38,7 +36,7 @@
 
     <div class="form-group">
         <label asp-for="Zip"></label>
-        <input asp-for="Zip" class="form-control" />
+        <input asp-for="Zip" class="form-control" value=@ViewBag.Zip />
     </div>
 
     @*<h3>Options</h3>*@
