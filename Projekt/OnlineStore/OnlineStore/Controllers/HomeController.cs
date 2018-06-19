@@ -169,7 +169,8 @@ namespace OnlineStore.Controllers
                     Email = model.Email
                 };
                 IdentityResult result
-                = await userManager.CreateAsync(user, model.Password);
+                    = await userManager.CreateAsync(user, model.Password);
+                await userManager.AddToRoleAsync(user, "Users"); //changed
                 if (result.Succeeded)
                 {
                     return RedirectToAction("OtherAction", "Home");

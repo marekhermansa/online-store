@@ -19,6 +19,7 @@ namespace OnlineStore.Models
         public decimal Price { get; set; }
         [Required(ErrorMessage = "Please specify a category")]
         public string Category { get; set; }
+        [Required]
         public string ImageUrl { get; set; }
         public string ImageUrl1 { get; set; }
         public string ImageUrl2 { get; set; }

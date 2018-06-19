@@ -11,7 +11,6 @@ namespace OnlineStore
 {
     public class Startup
     {
-
         // receive details of the configuration data 
         // contained in the appsettings.json file and 
         // use it to configure Entity Framework Core
