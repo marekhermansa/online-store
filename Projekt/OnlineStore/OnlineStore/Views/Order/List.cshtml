@@ -1,27 +1,11 @@
-﻿@*<style>
-        table, th, td {
-            border: 1px solid black;
-            border-collapse: collapse;
-        }
-
-        th {
-            text-align: left;
-        }
-    </style>*@
-
-@*<link rel="stylesheet" asp-href-include="css/style.css" />*@
-@*<link href="/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />*@
-
-@model IEnumerable<OnlineStore.Models.Order>
+﻿@model IEnumerable<OnlineStore.Models.Order>
 @{
     ViewBag.Title = "Orders";
-    //specify a new layout (override the layout specified in the _ViewStart.cshtml)
     Layout = "_AdminLayout";
 }
 
 @if (Model.Count() > 0)
 {
-    @*<table class="table table-bordered table-striped">*@
     <table class="table table-sm table-bordered">
         <tr><th>Name</th><th>Zip</th><th colspan="2">Details</th><th></th></tr>
         @foreach (OnlineStore.Models.Order o in Model)

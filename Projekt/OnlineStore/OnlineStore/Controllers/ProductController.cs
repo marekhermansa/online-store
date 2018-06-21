@@ -15,8 +15,6 @@ namespace OnlineStore.Controllers
         public ProductController(IProductRepository repository) =>
             this.repository = repository;
 
-        //public ViewResult List() => View(repository.Products);
-
         public int PageSize = 4;
 
         public ViewResult List(string category, int productPage = 1, string filter = "default")
@@ -26,7 +24,7 @@ namespace OnlineStore.Controllers
                 {
                     Products = repository.Products
                         .Where(p => category == null || p.Category == category)
-                        .OrderBy(p => p.ProductID) //refactor
+                        .OrderBy(p => p.ProductID)
                         .Skip((productPage - 1) * PageSize)
                         .Take(PageSize),
                     PagingInfo = new PagingInfo
@@ -45,7 +43,7 @@ namespace OnlineStore.Controllers
                 {
                     Products = repository.Products
                         .Where(p => category == null || p.Category == category)
-                        .OrderBy(p => p.Price) //refactor
+                        .OrderBy(p => p.Price)
                         .Skip((productPage - 1) * PageSize)
                         .Take(PageSize),
                     PagingInfo = new PagingInfo
@@ -80,26 +78,6 @@ namespace OnlineStore.Controllers
                 });
         }
 
-        //public ViewResult List(string category, int productPage = 1, string filter = "default") =>
-        //    View(new ProductsListViewModel
-        //    {
-        //        Products = repository.Products
-        //            .Where(p => category == null || p.Category == category)
-        //            .OrderBy(p => p.ProductID)
-        //            .Skip((productPage - 1) * PageSize)
-        //            .Take(PageSize),
-        //        PagingInfo = new PagingInfo
-        //        {
-        //            CurrentPage = productPage,
-        //            ItemsPerPage = PageSize,
-        //            TotalItems = category == null ?
-        //                repository.Products.Count() :
-        //                repository.Products.Where(e =>
-        //                e.Category == category).Count()
-        //        },
-        //        CurrentCategory = category
-        //    });
-
         public ViewResult ProductPage(int productId, string returnUrl)
         {
             Product product = repository.Products
@@ -108,20 +86,6 @@ namespace OnlineStore.Controllers
             ViewBag.ReturnUrl = returnUrl;
 
             return View(product);
-
-            //return View(new ProductIndexViewModel
-            //{
-            //    Product = product,
-            //    ReturnUrl = returnUrl
-            //});
         }
-
-        //public ViewResult Details(string productName)
-        //{
-        //    Product product = repository.Products
-        //    .FirstOrDefault(p => p.Name == productName);
-
-        //    return View("Details",product);
-        //}
     }
 }

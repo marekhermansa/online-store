@@ -23,8 +23,22 @@ namespace OnlineStore.Controllers
         public ViewResult List() =>
             View(repository.Orders.Where(o => !o.Shipped));
 
-        public ViewResult UserOrders() =>
-            View(repository.Orders.Where(o => o.UserID == CurrentUser.Result.Id));
+        public async Task<ViewResult> UserOrders()
+        {
+            ViewBag.currentuserid = CurrentUser.Result.Id;
+
+            AppUser user = await userManager.FindByEmailAsync(CurrentUser.Result.Email);
+            if (await userManager.IsInRoleAsync(user, "Admins"))
+            {
+                ViewBag.isAdmin = 1;
+            }
+            else
+            {
+                ViewBag.isAdmin = 0;
+            }
+            return View(repository.Orders.Where(o => (o.UserID == CurrentUser.Result.Id)));
+            //return View(repository.Orders.Where(o => !o.Shipped));
+        }
 
         [HttpPost]
         [Authorize]
@@ -74,12 +88,6 @@ namespace OnlineStore.Controllers
 
             if (ModelState.IsValid)
             {
-                //order.UserID = CurrentUser.Result.Id;
-                //order.Line1 = CurrentUser.Result.Line1; 
-                //order.Line2 = CurrentUser.Result.Line2;
-                //order.City = CurrentUser.Result.City;
-                //order.Zip = CurrentUser.Result.Zip;
-
                 order.Lines = cart.Lines.ToArray();
                 repository.SaveOrder(order);
                 return RedirectToAction(nameof(Completed));

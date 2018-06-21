@@ -5,9 +5,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 
-/*the session state cant store a Cart object;
-defining extension methods to store and retrieve Cart objects.*/
-
 namespace OnlineStore.Infrastructure
 {
     public static class SessionExtensions

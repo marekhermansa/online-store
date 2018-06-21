@@ -28,11 +28,9 @@ namespace OnlineStore
             services.AddDbContext<AppIdentityDbContext>(options =>
             options.UseSqlServer(
                 Configuration["Data:OnlineStoreIdentity:ConnectionString"]));
-
-            //services.AddIdentity<IdentityUser, IdentityRole>() //534
+            
             services.AddIdentity<AppUser, IdentityRole>(opts => {
                 opts.User.RequireUniqueEmail = true;
-                //opts.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyz";
                 opts.Password.RequiredLength = 6;
                 opts.Password.RequireNonAlphanumeric = false;
                 opts.Password.RequireLowercase = false;
@@ -41,9 +39,6 @@ namespace OnlineStore
 
             }).AddEntityFrameworkStores<AppIdentityDbContext>()
                 .AddDefaultTokenProviders();
-
-            //for testing purpose only
-            //services.AddTransient<IProductRepository, TemporaryProductRepository>();
 
             // set up shared objects
             services.AddMvc();
@@ -70,10 +65,14 @@ namespace OnlineStore
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             // set up an HTTP request processor
-
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseStatusCodePages();
+            }
+            else
+            {
+                app.UseExceptionHandler("/Error");
             }
             app.UseStaticFiles();
             // https://docs.microsoft.com/en-us/aspnet/core/fundamentals/error-handling
@@ -144,8 +143,7 @@ namespace OnlineStore
             SeedData.EnsurePopulated(app);
             //IdentitySeedData.EnsurePopulated(app); // for admin account
 
-            //AppIdentityDbContext.CreateAdminAccount(app.ApplicationServices,
-            //    Configuration).Wait();
+            //AppIdentityDbContext.CreateAdminAccount(app.ApplicationServices, Configuration).Wait();
         }
     }
 }

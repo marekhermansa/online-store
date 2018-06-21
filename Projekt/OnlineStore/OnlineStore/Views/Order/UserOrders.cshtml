@@ -1,8 +1,12 @@
 ﻿@model IEnumerable<OnlineStore.Models.Order>
 
+@if (ViewBag.isAdmin.ToString() == "1")
+{
+    Layout = "_AdminLayout";
+}
+
 @{
     ViewBag.Title = "Orders";
-    Layout = "_AdminLayout";
 }
 
 @if (Model.Count() > 0)

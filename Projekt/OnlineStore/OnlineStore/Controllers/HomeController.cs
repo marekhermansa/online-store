@@ -21,21 +21,6 @@ namespace OnlineStore.Controllers
         [Authorize]
         public IActionResult Index() => View(GetData(nameof(Index)));
 
-        //[Authorize]
-        //public async Task<IActionResult> Index(string id)
-        //{
-        //    AppUser user = await userManager.FindByIdAsync(id);
-        //    if (user != null)
-        //    {
-        //        return View(GetCustomData(nameof(Index)));
-        //    }
-        //    else
-        //    {
-        //        return RedirectToAction("Users", "Admin");
-        //    }
-        //}
-
-        //[Authorize(Roles = "Users")]
         [Authorize]
         public IActionResult OtherAction() => View("Index",
         GetData(nameof(OtherAction)));
@@ -70,9 +55,6 @@ namespace OnlineStore.Controllers
                 ["CreditCardOwner"] = user.CreditCardOwner,
                 ["CreditCardNumber"] = user.CreditCardNumber,
                 ["ExpirationDate"] = user.ExpirationDate
-
-                //["City"] = CurrentUser.Result.City,
-                //["Qualification"] = CurrentUser.Result.Qualifications,
             };
 
         private Dictionary<string, object> GetData(string actionName) =>
@@ -95,9 +77,6 @@ namespace OnlineStore.Controllers
                 ["CreditCardOwner"] = CurrentUser.Result.CreditCardOwner,
                 ["CreditCardNumber"] = CurrentUser.Result.CreditCardNumber,
                 ["ExpirationDate"] = CurrentUser.Result.ExpirationDate
-
-                //["City"] = CurrentUser.Result.City,
-                //["Qualification"] = CurrentUser.Result.Qualifications,
             };
 
         [Authorize]
@@ -134,23 +113,6 @@ namespace OnlineStore.Controllers
             }
             return View(await CurrentUser);
         }
-
-        //[Authorize]
-        //[HttpPost]
-        //public async Task<IActionResult> UserProps(
-        //    [Required]Cities city,
-        //    [Required]QualificationLevels qualifications)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        AppUser user = await CurrentUser;
-        //        user.City = city;
-        //        user.Qualifications = qualifications;
-        //        await userManager.UpdateAsync(user);
-        //        return RedirectToAction("Index");
-        //    }
-        //    return View(await CurrentUser);
-        //}
 
         private Task<AppUser> CurrentUser =>
             userManager.FindByNameAsync(HttpContext.User.Identity.Name);
